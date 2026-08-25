@@ -6,7 +6,8 @@ import { AgendaClinicaTab } from "./_components/agenda-clinica-tab"
 import { ConveniosTab } from "./_components/convenios-tab"
 import { ExecutantesTab } from "./_components/executantes-tab"
 import { FeriadosTab } from "./_components/feriados-tab"
-import { TiposAtendimentoTab } from "./_components/tipos-atendimento-tab"
+import { GradesHorarioTab } from "./_components/grades-horario-tab"
+import { TiposAtendimentoTab } from "./_components/tipo-atendimento/tab"
 
 const tabs = [
   { value: "agenda-da-clinica", label: "Agenda da clínica" },
@@ -23,6 +24,7 @@ const tabContent: Record<string, () => ReactNode> = {
   feriados: () => <FeriadosTab />,
   executantes: () => <ExecutantesTab />,
   convenios: () => <ConveniosTab />,
+  "grades-de-horario": () => <GradesHorarioTab />,
 }
 
 export default function AgendaConfigPage() {

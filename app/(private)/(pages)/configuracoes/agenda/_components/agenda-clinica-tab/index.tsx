@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 
-import { useAgendaClinicaForm } from "../_hooks/use-agenda-clinica-form"
+import { useAgendaClinicaForm } from "../../_hooks/use-agenda-clinica-form"
 
 const diasSemana = [
   "Segunda-Feira",

@@ -69,6 +69,7 @@ const geralItems: ConfigItem[] = [
     description:
       "Consultórios, salas, recepção e fila de espera.",
     icon: Monitor,
+    href: "/configuracoes/consultorios",
   },
   {
     title: "Agendamento Online",
@@ -81,6 +82,7 @@ const geralItems: ConfigItem[] = [
     description:
       "CNPJ, endereço, contato, nota fiscal, eCAC, etc.",
     icon: Building2,
+    href: "/configuracoes/informacoes-gerais",
   },
   {
     title: "Usuários",

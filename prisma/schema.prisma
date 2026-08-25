@@ -6,3 +6,177 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+// ==============================
+// Enums
+// ==============================
+
+enum AgendaView {
+  DAY
+  WEEK
+  WAITLIST
+}
+
+enum Recurrence {
+  WEEKLY
+  BIWEEKLY
+  MONTHLY
+}
+
+enum HolidayType {
+  RECURRING
+  SPECIFIC
+}
+
+enum HealthPlanRuleType {
+  APPOINTMENT_TYPES_RESTRICTION
+  MAX_QUANTITY_PER_PERIOD
+  MIN_REBOOK_INTERVAL
+  BOOKING_ADVANCE
+}
+
+enum AppointmentTypeCategory {
+  CONSULTATION
+  FOLLOW_UP
+  EXAM
+  PROCEDURE
+}
+
+enum ScheduleRuleType {
+  STANDARD
+  CUSTOM
+}
+
+enum Weekday {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+// ==============================
+// Models
+// ==============================
+
+model Unit {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clinicSchedule    ClinicSchedule?
+  healthPlanRules   HealthPlanRule[]
+  scheduleTemplates ScheduleTemplate[]
+}
+
+model ClinicSchedule {
+  id                      String        @id @default(cuid())
+  view                    AgendaView    @default(WEEK)
+  blockIntervalMinutes    Int           @default(30)
+  defaultAppointmentType  String?
+  operatingDays           String[]
+  openingTime             String        @default("07:00")
+  closingTime             String        @default("22:00")
+  unitId                  String?       @unique
+  unit                    Unit?         @relation(fields: [unitId], references: [id], onDelete: SetNull)
+  createdAt               DateTime      @default(now())
+  updatedAt               DateTime      @updatedAt
+}
+
+model AppointmentType {
+  id                String                   @id @default(cuid())
+  name              String                   @unique
+  durationMinutes   Int
+  returnPeriodDays  Int?
+  category          AppointmentTypeCategory
+  color             String
+  createdAt         DateTime                 @default(now())
+  updatedAt         DateTime                 @updatedAt
+
+  healthPlanRules   HealthPlanRule[]
+  scheduleTemplates ScheduleTemplate[]
+}
+
+model HealthPlan {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  healthPlanRules   HealthPlanRule[]
+  scheduleTemplates ScheduleTemplate[]
+}
+
+model HealthPlanRule {
+  id               String              @id @default(cuid())
+  ruleType         HealthPlanRuleType
+  startTime        String
+  endTime          String
+  weekdays         String[]
+  healthPlanId     String
+  healthPlan       HealthPlan          @relation(fields: [healthPlanId], references: [id], onDelete: Cascade)
+  unitId           String?
+  unit             Unit?               @relation(fields: [unitId], references: [id], onDelete: SetNull)
+  appointmentTypes AppointmentType[]
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+
+  @@index([healthPlanId])
+  @@index([unitId])
+}
+
+model Holiday {
+  id          String      @id @default(cuid())
+  type        HolidayType
+  name        String
+  day         Int
+  month       Int
+  isMandatory Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([day, month])
+}
+
+model Professional {
+  id           String           @id @default(cuid())
+  name         String
+  specialty    String
+  scheduleRule ScheduleRuleType @default(STANDARD)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+}
+
+model ScheduleTemplate {
+  id                String               @id @default(cuid())
+  title             String
+  recurrence        Recurrence
+  extraSlotCount    Int                  @default(0)
+  minAge            Int?
+  maxAge            Int?
+  genders           String[]
+  unitId            String?
+  unit              Unit?                @relation(fields: [unitId], references: [id], onDelete: SetNull)
+  days              ScheduleTemplateDay[]
+  appointmentTypes  AppointmentType[]
+  healthPlans       HealthPlan[]
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+
+  @@index([unitId])
+}
+
+model ScheduleTemplateDay {
+  id                 String           @id @default(cuid())
+  weekday            Weekday
+  isActive           Boolean          @default(false)
+  startTime          String?
+  endTime            String?
+  scheduleTemplateId String
+  scheduleTemplate   ScheduleTemplate @relation(fields: [scheduleTemplateId], references: [id], onDelete: Cascade)
+
+  @@unique([scheduleTemplateId, weekday])
+}

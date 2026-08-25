@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-import { useFeriadoForm } from "../_hooks/use-feriado-form"
+import { useFeriadoForm } from "../../_hooks/use-feriado-form"
 
 const meses = [
   "Janeiro",

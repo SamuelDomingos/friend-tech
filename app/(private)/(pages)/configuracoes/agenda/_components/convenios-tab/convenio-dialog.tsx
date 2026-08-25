@@ -24,8 +24,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-import { useConvenioForm } from "../_hooks/use-convenio-form"
-import { TIPOS_ATENDIMENTO, TiposTransfer } from "./tipos-transfer"
+import { useConvenioForm } from "../../_hooks/use-convenio-form"
+import { TIPOS_ATENDIMENTO, TiposTransfer } from "../_shared/tipos-transfer"
 
 const convenios = ["Amil", "Unimed", "SulAmérica", "Bradesco Saúde"]
 

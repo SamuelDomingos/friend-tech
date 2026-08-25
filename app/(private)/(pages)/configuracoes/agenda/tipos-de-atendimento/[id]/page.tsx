@@ -1,4 +1,4 @@
-import { TipoAtendimentoForm } from "../../_components/tipo-atendimento-form"
+import { TipoAtendimentoForm } from "../../_components/tipo-atendimento/form"
 
 export default async function EditarTipoAtendimentoPage({
   params,
