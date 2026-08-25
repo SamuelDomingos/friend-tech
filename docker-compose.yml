@@ -1,0 +1,29 @@
+# ============================================================
+# docker-compose para rodar o app localmente / na VPS.
+# Lê variáveis do arquivo .env ao lado (docker compose usa ./.env
+# automaticamente para interpolar os ${...} abaixo).
+#
+#   docker compose up --build
+#
+# NEXT_PUBLIC_* entram como build-args (embutidas no bundle em build).
+# As demais são env de runtime (só servidor) e nunca vão para o client.
+# ============================================================
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+    image: gt-estoque:local
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      # Runtime (server-side) — nunca embutidas no client:
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
+      DATABASE_URL: ${DATABASE_URL}
+      # Web Push (chave privada, server-side). Opcional — descomente se usar.
+      # VAPID_PRIVATE_KEY: ${VAPID_PRIVATE_KEY}
