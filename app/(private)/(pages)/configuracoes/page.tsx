@@ -115,12 +115,14 @@ const financeiroItems: ConfigItem[] = [
     description:
       "Contas bancárias, plano de contas, centro de custos e tags financeiras.",
     icon: Landmark,
+    href: "/configuracoes/financeiro",
   },
   {
     title: "Repasse",
     description:
       "Configuração de repasses dos profissionais da sua clínica e suas regras.",
     icon: Receipt,
+    href: "/configuracoes/repasse",
   },
   {
     title: "Cartões",

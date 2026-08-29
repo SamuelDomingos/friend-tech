@@ -48,6 +48,14 @@ const breadcrumbs: Record<
     label: "Laudo",
     parent: { label: "Configurações", href: "/configuracoes" },
   },
+  "/configuracoes/financeiro": {
+    label: "Financeiro",
+    parent: { label: "Configurações", href: "/configuracoes" },
+  },
+  "/configuracoes/repasse": {
+    label: "Repasse",
+    parent: { label: "Configurações", href: "/configuracoes" },
+  },
 }
 
 export function Header() {

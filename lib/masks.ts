@@ -31,6 +31,20 @@ export function formatarCep(valor: string): string {
   return digitos.replace(/^(\d{5})(\d)/, "$1-$2")
 }
 
+export function formatarMoeda(valor: string): string {
+  const digitos = somenteDigitos(valor).slice(0, 12)
+
+  if (digitos.length === 0) {
+    return ""
+  }
+
+  const numero = parseInt(digitos, 10)
+  const reais = Math.floor(numero / 100)
+  const centavos = numero % 100
+
+  return `${reais.toLocaleString("pt-BR")},${String(centavos).padStart(2, "0")}`
+}
+
 export function daDataISO(iso: string): Date | undefined {
   if (!iso) {
     return undefined
