@@ -9,7 +9,7 @@ export function CertificadoDigitalConfig() {
   return (
     <section className="space-y-4">
       <h2 className="flex items-center gap-2 text-lg font-semibold">
-        <ShieldCheck className="size-5 text-muted-foreground" />
+        <ShieldCheck className="size-5 text-primary" />
         Configuração de Certificado Digital
       </h2>
 

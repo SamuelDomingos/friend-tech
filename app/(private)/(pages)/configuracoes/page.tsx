@@ -36,12 +36,7 @@ import {
   ItemMedia,
   ItemTitle,
 } from "@/components/ui/item"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 interface ConfigItem {
   title: string
@@ -59,15 +54,13 @@ interface ConfigSection {
 const geralItems: ConfigItem[] = [
   {
     title: "Agenda",
-    description:
-      "Horários, atendimentos, feriados, executantes e convênios.",
+    description: "Horários, atendimentos, feriados, executantes e convênios.",
     icon: CalendarDays,
     href: "/configuracoes/agenda",
   },
   {
     title: "Consultórios, salas e painel chamador",
-    description:
-      "Consultórios, salas, recepção e fila de espera.",
+    description: "Consultórios, salas, recepção e fila de espera.",
     icon: Monitor,
     href: "/configuracoes/consultorios",
   },
@@ -79,22 +72,21 @@ const geralItems: ConfigItem[] = [
   },
   {
     title: "Informações gerais",
-    description:
-      "CNPJ, endereço, contato, nota fiscal, eCAC, etc.",
+    description: "CNPJ, endereço, contato, nota fiscal, eCAC, etc.",
     icon: Building2,
     href: "/configuracoes/informacoes-gerais",
   },
   {
     title: "Usuários",
-    description:
-      "Adições, permissões e informações de usuários.",
+    description: "Adições, permissões e informações de usuários.",
     icon: Users,
+    href: "/configuracoes/usuarios",
   },
   {
     title: "Unidades",
-    description:
-      "Gerenciamento e configuração de unidades e grupos.",
+    description: "Gerenciamento e configuração de unidades e grupos.",
     icon: LayoutGrid,
+    href: "/configuracoes/unidades",
   },
   {
     title: "Relacionamento",
@@ -113,6 +105,7 @@ const geralItems: ConfigItem[] = [
     description:
       "Configurações de grupos, modelos, motivos de revisão, fluxos e achados críticos.",
     icon: FileSearch,
+    href: "/configuracoes/laudo",
   },
 ]
 
@@ -131,8 +124,7 @@ const financeiroItems: ConfigItem[] = [
   },
   {
     title: "Cartões",
-    description:
-      "Gerenciamento de cartões aceitos na sua clínica.",
+    description: "Gerenciamento de cartões aceitos na sua clínica.",
     icon: CreditCard,
   },
 ]
@@ -140,50 +132,42 @@ const financeiroItems: ConfigItem[] = [
 const gestaoConvenioItems: ConfigItem[] = [
   {
     title: "Convênios",
-    description:
-      "Gerenciamento dos convênios aceitos na sua clínica.",
+    description: "Gerenciamento dos convênios aceitos na sua clínica.",
     icon: Handshake,
   },
   {
     title: "Hospitais",
-    description:
-      "Gerenciamento de hospitais da sua clínica.",
+    description: "Gerenciamento de hospitais da sua clínica.",
     icon: Hospital,
   },
   {
     title: "Materiais e medicamentos",
-    description:
-      "Gerenciamento de outras despesas de sua clínica.",
+    description: "Gerenciamento de outras despesas de sua clínica.",
     icon: Pill,
   },
   {
     title: "Solicitantes",
-    description:
-      "Gerenciamento e definição de regras de solicitantes.",
+    description: "Gerenciamento e definição de regras de solicitantes.",
     icon: UserRound,
   },
   {
     title: "Tabela de preços",
-    description:
-      "Gerenciamento de tabelas de preço da sua clínica.",
+    description: "Gerenciamento de tabelas de preço da sua clínica.",
     icon: Table2,
   },
   {
     title: "Executantes",
-    description:
-      "Gerenciamento de médicos externos à sua clínica.",
+    description: "Gerenciamento de médicos externos à sua clínica.",
     icon: Stethoscope,
   },
   {
     title: "Procedimentos",
-    description:
-      "Essa é a descrição do passo atual.",
+    description: "Essa é a descrição do passo atual.",
     icon: ClipboardList,
   },
   {
     title: "Regras de faturamento",
-    description:
-      "Gestão das regras de faturamento dos convênios.",
+    description: "Gestão das regras de faturamento dos convênios.",
     icon: FileText,
   },
 ]
@@ -203,14 +187,12 @@ const avancadasItems: ConfigItem[] = [
   },
   {
     title: "Como conheceu",
-    description:
-      'Gerenciamento das opções do campo "Como conheceu".',
+    description: 'Gerenciamento das opções do campo "Como conheceu".',
     icon: UserPlus,
   },
   {
     title: "Parametrização",
-    description:
-      "Gestão de módulos, tipos de prontuários, SMS e extras.",
+    description: "Gestão de módulos, tipos de prontuários, SMS e extras.",
     icon: SlidersHorizontal,
   },
   {
@@ -248,17 +230,13 @@ function ConfigItemContent({ item }: { item: ConfigItem }) {
   return (
     <>
       <ItemMedia variant="icon">
-        <item.icon className="size-5 text-muted-foreground" />
+        <item.icon className="size-5 text-muted-foreground group-hover/item:text-primary" />
       </ItemMedia>
 
       <ItemContent>
-        <ItemTitle className="font-medium">
-          {item.title}
-        </ItemTitle>
+        <ItemTitle className="font-medium">{item.title}</ItemTitle>
 
-        <ItemDescription>
-          {item.description}
-        </ItemDescription>
+        <ItemDescription>{item.description}</ItemDescription>
       </ItemContent>
     </>
   )
@@ -268,23 +246,18 @@ export default function ConfiguracoesPage() {
   return (
     <div className="space-y-6">
       <div className="space-y-1">
-        <h1 className="text-2xl font-semibold">
-          Configurações
-        </h1>
+        <h1 className="text-2xl font-semibold">Configurações</h1>
 
         <p className="max-w-2xl text-muted-foreground">
-          Nesta seção você pode parametrizar todo o sistema de acordo
-          com as suas necessidades.
+          Nesta seção você pode parametrizar todo o sistema de acordo com as
+          suas necessidades.
         </p>
       </div>
 
       <Tabs defaultValue="geral">
         <TabsList variant="line">
           {sections.map((section) => (
-            <TabsTrigger
-              key={section.value}
-              value={section.value}
-            >
+            <TabsTrigger key={section.value} value={section.value}>
               {section.label}
             </TabsTrigger>
           ))}

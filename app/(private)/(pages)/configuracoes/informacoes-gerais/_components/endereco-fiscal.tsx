@@ -9,7 +9,7 @@ export function EnderecoFiscal() {
   return (
     <section className="space-y-4">
       <h2 className="flex items-center gap-2 text-lg font-semibold">
-        <MapPinned className="size-5 text-muted-foreground" />
+        <MapPinned className="size-5 text-primary" />
         Endereço Fiscal
       </h2>
 

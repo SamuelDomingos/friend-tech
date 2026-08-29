@@ -12,11 +12,9 @@ import {
 import { Checkbox } from "@/components/ui/checkbox"
 import { Field, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import { Transfer } from "@/components/transfer"
 
-import {
-  TIPOS_ATENDIMENTO,
-  TiposTransfer,
-} from "../_shared/tipos-transfer"
+import { TIPOS_ATENDIMENTO } from "../_shared/tipos-atendimento"
 import type { GradeHorarioFormData } from "../../_schemas/grade-horario.schema"
 
 const GENEROS = ["Masculino", "Feminino"]
@@ -36,7 +34,8 @@ export function AcordeonRestricoes({ form }: AcordeonRestricoesProps) {
   )
 
   const todosConvenios =
-    convenios.length > 0 && CONVENIOS.every((convenio) => convenios.includes(convenio))
+    convenios.length > 0 &&
+    CONVENIOS.every((convenio) => convenios.includes(convenio))
   const algumConvenio = convenios.length > 0
 
   const toggleConvenio = (convenio: string) => {
@@ -133,7 +132,7 @@ export function AcordeonRestricoes({ form }: AcordeonRestricoesProps) {
         <AccordionTrigger>Tipos de atendimentos</AccordionTrigger>
 
         <AccordionContent className="px-1 pt-3">
-          <TiposTransfer
+          <Transfer
             disponiveis={disponiveis}
             inclusos={tiposInclusos}
             onIncludedChange={(inclusos) =>
@@ -151,13 +150,14 @@ export function AcordeonRestricoes({ form }: AcordeonRestricoesProps) {
             <label className="flex cursor-pointer items-center gap-2 text-sm font-medium">
               <Checkbox
                 checked={
-                  todosConvenios ? true : algumConvenio ? "indeterminate" : false
+                  todosConvenios
+                    ? true
+                    : algumConvenio
+                      ? "indeterminate"
+                      : false
                 }
                 onCheckedChange={(c) =>
-                  form.setValue(
-                    "convenios",
-                    Boolean(c) ? [...CONVENIOS] : []
-                  )
+                  form.setValue("convenios", Boolean(c) ? [...CONVENIOS] : [])
                 }
               />
               Selecionar todos

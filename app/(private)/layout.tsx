@@ -1,3 +1,5 @@
+import { cookies } from "next/headers"
+
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { TooltipProvider } from "@/components/ui/tooltip"
 
@@ -8,15 +10,18 @@ import { Header } from "./_components/header"
 // (evita criar o client Supabase com env vazio em CI/Docker).
 export const dynamic = "force-dynamic"
 
-export default function PrivateLayout({
+export default async function PrivateLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const cookieStore = await cookies()
+  const defaultOpen = cookieStore.get("sidebar_state")?.value === "true"
+
   return (
     <div className="flex min-h-dvh w-full">
       <TooltipProvider delayDuration={0}>
-        <SidebarProvider>
+        <SidebarProvider defaultOpen={defaultOpen}>
           <AppSidebar />
 
           <div className="flex flex-1 flex-col">

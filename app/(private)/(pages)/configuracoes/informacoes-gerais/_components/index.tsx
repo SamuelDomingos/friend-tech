@@ -20,7 +20,7 @@ export function InformacoesGeraisView() {
 
       <section className="space-y-4">
         <h2 className="flex items-center gap-2 text-lg font-semibold">
-          <MapPin className="size-5 text-muted-foreground" />
+          <MapPin className="size-5 text-primary" />
           Endereço da clínica
         </h2>
 
@@ -31,7 +31,7 @@ export function InformacoesGeraisView() {
 
       <section className="space-y-4">
         <h2 className="flex items-center gap-2 text-lg font-semibold">
-          <MapPin className="size-5 text-muted-foreground" />
+          <MapPin className="size-5 text-primary" />
           Endereço da clínica 2
         </h2>
 

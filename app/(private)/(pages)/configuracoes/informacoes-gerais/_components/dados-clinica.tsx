@@ -12,7 +12,7 @@ export function DadosClinica() {
     <section className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="flex items-center gap-2 text-lg font-semibold">
-          <Building2 className="size-5 text-muted-foreground" />
+          <Building2 className="size-5 text-primary" />
           Dados da clínica
         </h2>
 

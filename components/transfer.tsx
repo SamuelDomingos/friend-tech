@@ -13,27 +13,27 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
 
-// Tipos de atendimento disponíveis no sistema (mock).
-export const TIPOS_ATENDIMENTO = [
-  "Consulta inicial",
-  "Retorno",
-  "Exame de sangue",
-  "Curativo",
-  "Teleconsulta",
-  "Avaliação pré-operatória",
-]
-
-interface TiposTransferProps {
+interface TransferProps {
   disponiveis: string[]
   inclusos: string[]
   onIncludedChange: (inclusos: string[]) => void
+  disponiveisTitle?: string
+  inclusosTitle?: string
+  disponiveisEmpty?: string
+  inclusosEmpty?: string
+  searchPlaceholder?: string
 }
 
-export function TiposTransfer({
+export function Transfer({
   disponiveis,
   inclusos,
   onIncludedChange,
-}: TiposTransferProps) {
+  disponiveisTitle = "Disponíveis",
+  inclusosTitle = "Inclusos na regra",
+  disponiveisEmpty = "Nenhum item disponível.",
+  inclusosEmpty = "Nenhum item incluso.",
+  searchPlaceholder = "Pesquisar...",
+}: TransferProps) {
   const [searchDisp, setSearchDisp] = useState("")
   const [searchInc, setSearchInc] = useState("")
   const [selDisp, setSelDisp] = useState<Set<string>>(new Set())
@@ -65,15 +65,47 @@ export function TiposTransfer({
     setSelInc(new Set())
   }
 
+  const renderList = (
+    items: string[],
+    selected: Set<string>,
+    onSelect: (set: Set<string>) => void,
+    empty: string
+  ) =>
+    items.length === 0 ? (
+      <p className="px-2 py-4 text-center text-sm text-muted-foreground">
+        {empty}
+      </p>
+    ) : (
+      items.map((nome, index) => {
+        const isSelected = selected.has(nome)
+
+        return (
+          <button
+            key={`${nome}-${index}`}
+            type="button"
+            onClick={() => onSelect(toggle(selected, nome))}
+            className={cn(
+              "w-full rounded-md px-2 py-1.5 text-left text-sm",
+              isSelected
+                ? "bg-accent font-medium text-accent-foreground"
+                : "hover:bg-muted"
+            )}
+          >
+            {nome}
+          </button>
+        )
+      })
+    )
+
   return (
     <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr]">
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Disponíveis</CardTitle>
+          <CardTitle className="text-base">{disponiveisTitle}</CardTitle>
 
           <InputGroup>
             <InputGroupInput
-              placeholder="Pesquisar..."
+              placeholder={searchPlaceholder}
               value={searchDisp}
               onChange={(e) => setSearchDisp(e.target.value)}
             />
@@ -86,31 +118,7 @@ export function TiposTransfer({
         <CardContent>
           <ScrollArea className="h-64 rounded-md border">
             <div className="space-y-1 p-2">
-              {filteredDisp.length === 0 ? (
-                <p className="px-2 py-4 text-center text-sm text-muted-foreground">
-                  Nenhum tipo de atendimento disponível.
-                </p>
-              ) : (
-                filteredDisp.map((nome) => {
-                  const selected = selDisp.has(nome)
-
-                  return (
-                    <button
-                      key={nome}
-                      type="button"
-                      onClick={() => setSelDisp((prev) => toggle(prev, nome))}
-                      className={cn(
-                        "w-full rounded-md px-2 py-1.5 text-left text-sm",
-                        selected
-                          ? "bg-accent font-medium text-accent-foreground"
-                          : "hover:bg-muted"
-                      )}
-                    >
-                      {nome}
-                    </button>
-                  )
-                })
-              )}
+              {renderList(filteredDisp, selDisp, setSelDisp, disponiveisEmpty)}
             </div>
           </ScrollArea>
         </CardContent>
@@ -140,11 +148,11 @@ export function TiposTransfer({
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Inclusos na regra</CardTitle>
+          <CardTitle className="text-base">{inclusosTitle}</CardTitle>
 
           <InputGroup>
             <InputGroupInput
-              placeholder="Pesquisar..."
+              placeholder={searchPlaceholder}
               value={searchInc}
               onChange={(e) => setSearchInc(e.target.value)}
             />
@@ -157,31 +165,7 @@ export function TiposTransfer({
         <CardContent>
           <ScrollArea className="h-64 rounded-md border">
             <div className="space-y-1 p-2">
-              {filteredInc.length === 0 ? (
-                <p className="px-2 py-4 text-center text-sm text-muted-foreground">
-                  Nenhum tipo de atendimento incluso.
-                </p>
-              ) : (
-                filteredInc.map((nome) => {
-                  const selected = selInc.has(nome)
-
-                  return (
-                    <button
-                      key={nome}
-                      type="button"
-                      onClick={() => setSelInc((prev) => toggle(prev, nome))}
-                      className={cn(
-                        "w-full rounded-md px-2 py-1.5 text-left text-sm",
-                        selected
-                          ? "bg-accent font-medium text-accent-foreground"
-                          : "hover:bg-muted"
-                      )}
-                    >
-                      {nome}
-                    </button>
-                  )
-                })
-              )}
+              {renderList(filteredInc, selInc, setSelInc, inclusosEmpty)}
             </div>
           </ScrollArea>
         </CardContent>

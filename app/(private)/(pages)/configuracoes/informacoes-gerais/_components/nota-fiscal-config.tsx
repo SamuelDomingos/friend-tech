@@ -9,7 +9,7 @@ export function NotaFiscalConfig() {
   return (
     <section className="space-y-4">
       <h2 className="flex items-center gap-2 text-lg font-semibold">
-        <ReceiptText className="size-5 text-muted-foreground" />
+        <ReceiptText className="size-5 text-primary" />
         Padronização da Nota Fiscal
       </h2>
 

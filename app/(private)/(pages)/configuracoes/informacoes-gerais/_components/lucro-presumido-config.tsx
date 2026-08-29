@@ -9,7 +9,7 @@ export function LucroPresumidoConfig() {
   return (
     <section className="space-y-4">
       <h2 className="flex items-center gap-2 text-lg font-semibold">
-        <Percent className="size-5 text-muted-foreground" />
+        <Percent className="size-5 text-primary" />
         Configuração do Lucro Presumido
       </h2>
 

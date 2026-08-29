@@ -62,14 +62,6 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
               <div className="flex aspect-square size-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                 <Stethoscope className="size-5" />
               </div>
-
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">Friend Tech</span>
-
-                <span className="truncate text-xs text-muted-foreground">
-                  Sistema Clínico
-                </span>
-              </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

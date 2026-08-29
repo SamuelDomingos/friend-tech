@@ -25,7 +25,8 @@ import {
 } from "@/components/ui/select"
 
 import { useConvenioForm } from "../../_hooks/use-convenio-form"
-import { TIPOS_ATENDIMENTO, TiposTransfer } from "../_shared/tipos-transfer"
+import { Transfer } from "@/components/transfer"
+import { TIPOS_ATENDIMENTO } from "../_shared/tipos-atendimento"
 
 const convenios = ["Amil", "Unimed", "SulAmérica", "Bradesco Saúde"]
 
@@ -253,7 +254,7 @@ export function ConvenioDialog({
             )}
           />
 
-          <TiposTransfer
+          <Transfer
             disponiveis={disponiveis}
             inclusos={inclusos}
             onIncludedChange={setInclusos}

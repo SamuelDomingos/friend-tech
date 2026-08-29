@@ -36,6 +36,18 @@ const breadcrumbs: Record<
     label: "Agenda",
     parent: { label: "Configurações", href: "/configuracoes" },
   },
+  "/configuracoes/usuarios": {
+    label: "Usuários",
+    parent: { label: "Configurações", href: "/configuracoes" },
+  },
+  "/configuracoes/unidades": {
+    label: "Unidades",
+    parent: { label: "Configurações", href: "/configuracoes" },
+  },
+  "/configuracoes/laudo": {
+    label: "Laudo",
+    parent: { label: "Configurações", href: "/configuracoes" },
+  },
 }
 
 export function Header() {

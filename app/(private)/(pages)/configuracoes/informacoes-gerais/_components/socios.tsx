@@ -13,7 +13,7 @@ export function Socios() {
   return (
     <section className="space-y-4">
       <h2 className="flex items-center gap-2 text-lg font-semibold">
-        <Users className="size-5 text-muted-foreground" />
+        <Users className="size-5 text-primary" />
         Sócios
       </h2>
 
