@@ -4,6 +4,10 @@ import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
+import Image from "next/image"
+
+import { cn } from "@/lib/utils"
+
 import {
   BarChart3,
   Calculator,
@@ -12,7 +16,6 @@ import {
   Handshake,
   Package,
   Settings,
-  Stethoscope,
   Users,
   Wallet,
 } from "lucide-react"
@@ -59,9 +62,16 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg">
-              <div className="flex aspect-square size-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <Stethoscope className="size-5" />
-              </div>
+              <Image
+                src="/logo.svg"
+                alt="Logo"
+                width={collapsed ? 40 : 120}
+                height={collapsed ? 40 : 96}
+                className={cn(
+                  "rounded-lg transition-all duration-200",
+                  collapsed ? "size-10" : "mx-auto size-10",
+                )}
+              />
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
