@@ -126,8 +126,9 @@ const financeiroItems: ConfigItem[] = [
   },
   {
     title: "Cartões",
-    description: "Gerenciamento de cartões aceitos na sua clínica.",
+    description: "Gerenciamento de maquinetas e grupos de cartão da sua clínica.",
     icon: CreditCard,
+    href: "/configuracoes/cartoes",
   },
 ]
 
@@ -136,6 +137,7 @@ const gestaoConvenioItems: ConfigItem[] = [
     title: "Convênios",
     description: "Gerenciamento dos convênios aceitos na sua clínica.",
     icon: Handshake,
+    href: "/configuracoes/agreement",
   },
   {
     title: "Hospitais",

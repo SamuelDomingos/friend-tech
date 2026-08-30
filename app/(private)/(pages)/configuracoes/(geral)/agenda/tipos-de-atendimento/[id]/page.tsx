@@ -8,7 +8,7 @@ export default async function EditarTipoAtendimentoPage({
   const { id } = await params
 
   return (
-    <div className="max-w-2xl space-y-6">
+    <div className="space-y-6">
       <div className="space-y-1">
         <h1 className="text-2xl font-semibold">Editar tipo de atendimento</h1>
 

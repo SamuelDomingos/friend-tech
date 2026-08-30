@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/button"
 import { Field, FieldLabel } from "@/components/ui/field"
 import {
   InputGroup,
+  InputGroupAddon,
   InputGroupInput,
-  InputGroupText,
 } from "@/components/ui/input-group"
 import {
   Select,
@@ -94,7 +94,7 @@ export function ConfiguracaoImpressao({ form }: ConfiguracaoImpressaoProps) {
                   id={field.name}
                   inputMode="numeric"
                 />
-                <InputGroupText data-align="inline-end">mm</InputGroupText>
+                <InputGroupAddon align="inline-end">mm</InputGroupAddon>
               </InputGroup>
             </Field>
           )}

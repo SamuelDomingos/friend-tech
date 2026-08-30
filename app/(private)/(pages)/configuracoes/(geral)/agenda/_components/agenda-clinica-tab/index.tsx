@@ -7,8 +7,8 @@ import { Field, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import {
   InputGroup,
+  InputGroupAddon,
   InputGroupInput,
-  InputGroupText,
 } from "@/components/ui/input-group"
 import {
   Select,
@@ -44,7 +44,7 @@ export function AgendaClinicaTab() {
   const { control } = form
 
   return (
-    <div className="max-w-2xl space-y-8">
+    <div className="space-y-8">
       <section className="space-y-4">
         <h2 className="text-lg font-semibold">Definições gerais</h2>
 
@@ -95,7 +95,7 @@ export function AgendaClinicaTab() {
                       field.onChange(e.target.value.replace(/\D/g, ""))
                     }
                   />
-                  <InputGroupText data-align="inline-end">Min</InputGroupText>
+                  <InputGroupAddon align="inline-end">Min</InputGroupAddon>
                 </InputGroup>
 
                 <ErrorText message={fieldState.error?.message} />
@@ -210,7 +210,7 @@ export function AgendaClinicaTab() {
 
                 <InputGroup>
                   <InputGroupInput {...field} id={field.name} type="time" />
-                  <InputGroupText data-align="inline-end">Horas</InputGroupText>
+                  <InputGroupAddon align="inline-end">Horas</InputGroupAddon>
                 </InputGroup>
 
                 <ErrorText message={fieldState.error?.message} />
@@ -227,7 +227,7 @@ export function AgendaClinicaTab() {
 
                 <InputGroup>
                   <InputGroupInput {...field} id={field.name} type="time" />
-                  <InputGroupText data-align="inline-end">Horas</InputGroupText>
+                  <InputGroupAddon align="inline-end">Horas</InputGroupAddon>
                 </InputGroup>
 
                 <ErrorText message={fieldState.error?.message} />

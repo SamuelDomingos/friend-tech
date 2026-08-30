@@ -57,7 +57,7 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
   const collapsed = state === "collapsed"
 
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar variant="floating" collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>

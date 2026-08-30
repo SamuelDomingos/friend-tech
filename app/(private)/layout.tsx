@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 
 import { AppSidebar } from "./_components/sidebar"
 import { Header } from "./_components/header"
+import { Card, CardContent } from "@/components/ui/card"
 
 // Páginas privadas dependem de auth — não pré-renderizar em build time
 // (evita criar o client Supabase com env vazio em CI/Docker).
@@ -19,17 +20,19 @@ export default async function PrivateLayout({
   const defaultOpen = cookieStore.get("sidebar_state")?.value === "true"
 
   return (
-    <div className="flex min-h-dvh w-full">
+    <div>
       <TooltipProvider delayDuration={0}>
         <SidebarProvider defaultOpen={defaultOpen}>
           <AppSidebar />
 
-          <div className="flex flex-1 flex-col">
+          <div className="flex flex-1 flex-col mx-4">
             <Header />
 
-            <main className="mx-auto size-full max-w-7xl flex-1 px-4 py-6 sm:px-6">
-              {children}
-            </main>
+            <Card className="flex flex-1 flex-col mb-2">
+              <CardContent className="overflow-auto">
+                {children}
+              </CardContent>
+            </Card>
           </div>
         </SidebarProvider>
       </TooltipProvider>

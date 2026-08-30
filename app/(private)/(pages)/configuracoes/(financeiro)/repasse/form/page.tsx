@@ -53,7 +53,7 @@ export default function RepasseFormPage() {
   }
 
   return (
-    <div className="max-w-4xl space-y-6">
+    <div className="space-y-6">
       <div className="space-y-1">
         <h1 className="text-2xl font-semibold">Regra de repasse</h1>
 

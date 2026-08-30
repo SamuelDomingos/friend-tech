@@ -17,6 +17,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar"
 import { ModeToggle } from "./mode-toggle"
 import { ProfileDropdown } from "./dropdown-profile"
 import { SearchPacientes } from "./search-pacientes"
+import { Card, CardContent } from "@/components/ui/card"
 
 const breadcrumbs: Record<
   string,
@@ -56,6 +57,18 @@ const breadcrumbs: Record<
     label: "Repasse",
     parent: { label: "Configurações", href: "/configuracoes" },
   },
+  "/configuracoes/cartoes": {
+    label: "Cartões",
+    parent: { label: "Configurações", href: "/configuracoes" },
+  },
+  "/configuracoes/agreement": {
+    label: "Convênios",
+    parent: { label: "Configurações", href: "/configuracoes" },
+  },
+  "/configuracoes/agreement/novo": {
+    label: "Novo convênio",
+    parent: { label: "Convênios", href: "/configuracoes/agreement" },
+  },
 }
 
 export function Header() {
@@ -77,50 +90,54 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-sidebar">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-2 sm:px-6">
-        <div className="flex min-w-0 items-center gap-4">
-          <SidebarTrigger className="[&_svg]:size-5!" />
+    <Card className="mt-2 mb-4 p-0 sticky top-2 z-50">
+      <CardContent className="p-0">
+        <header>
+          <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-2 sm:px-6">
+            <div className="flex min-w-0 items-center gap-4">
+              <SidebarTrigger className="[&_svg]:size-5!" />
 
-          {breadcrumb && (
-            <>
-              <Separator
-                orientation="vertical"
-                className="hidden h-4 sm:block"
-              />
+              {breadcrumb && (
+                <>
+                  <Separator
+                    orientation="vertical"
+                    className="hidden sm:block"
+                  />
 
-              <Breadcrumb className="hidden sm:block">
-                <BreadcrumbList>
-                  {breadcrumb.parent && (
-                    <>
+                  <Breadcrumb className="hidden sm:block">
+                    <BreadcrumbList>
+                      {breadcrumb.parent && (
+                        <>
+                          <BreadcrumbItem>
+                            <BreadcrumbLink asChild>
+                              <Link href={breadcrumb.parent.href}>
+                                {breadcrumb.parent.label}
+                              </Link>
+                            </BreadcrumbLink>
+                          </BreadcrumbItem>
+
+                          <BreadcrumbSeparator />
+                        </>
+                      )}
+
                       <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                          <Link href={breadcrumb.parent.href}>
-                            {breadcrumb.parent.label}
-                          </Link>
-                        </BreadcrumbLink>
+                        <BreadcrumbPage>{breadcrumb.label}</BreadcrumbPage>
                       </BreadcrumbItem>
+                    </BreadcrumbList>
+                  </Breadcrumb>
+                </>
+              )}
+            </div>
 
-                      <BreadcrumbSeparator />
-                    </>
-                  )}
+            <SearchPacientes />
 
-                  <BreadcrumbItem>
-                    <BreadcrumbPage>{breadcrumb.label}</BreadcrumbPage>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
-            </>
-          )}
-        </div>
-
-        <SearchPacientes />
-
-        <div className="flex items-center gap-1.5">
-          <ModeToggle />
-          <ProfileDropdown />
-        </div>
-      </div>
-    </header>
+            <div className="flex items-center gap-1.5">
+              <ModeToggle />
+              <ProfileDropdown />
+            </div>
+          </div>
+        </header>
+      </CardContent>
+    </Card>
   )
 }
