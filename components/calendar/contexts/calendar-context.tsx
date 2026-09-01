@@ -3,22 +3,29 @@
 import { createContext, useContext, useState, useMemo } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import type {
-  Barber,
   ConfigData,
   TBadgeVariant,
   TVisibleHours,
   TWorkingHours,
 } from "@/components/calendar/types";
-import { IEvent } from "../interfaces";
+import { IEvent, IUser } from "../interfaces";
+
+export interface IUnidade {
+  id: string;
+  nome: string;
+}
 
 interface ICalendarContext {
   selectedDate: Date;
   setSelectedDate: (date: Date | undefined) => void;
-  selectedUserId: Barber["id"] | "all";
-  setSelectedUserId: (userId: Barber["id"] | "all") => void;
+  selectedUserId: IUser["id"] | "all";
+  setSelectedUserId: (userId: IUser["id"] | "all") => void;
+  selectedUnidadeId: IUnidade["id"] | "all";
+  setSelectedUnidadeId: (unidadeId: IUnidade["id"] | "all") => void;
   badgeVariant: TBadgeVariant;
   setBadgeVariant: (variant: TBadgeVariant) => void;
-  users: Barber[];
+  users: IUser[];
+  unidades: IUnidade[];
   configData: ConfigData;
   workingHours: TWorkingHours;
   visibleHours: TVisibleHours;
@@ -43,11 +50,13 @@ const DEFAULT_VISIBLE_HOURS: TVisibleHours = { from: 7, to: 18 };
 export function CalendarProvider({
   children,
   users,
+  unidades,
   events,
   configData,
 }: {
   children: React.ReactNode;
-  users: Barber[];
+  users: IUser[];
+  unidades: IUnidade[];
   events: IEvent[];
   configData: ConfigData;
 }) {
@@ -83,9 +92,12 @@ export function CalendarProvider({
 
   const [badgeVariant, setBadgeVariant] = useState<TBadgeVariant>("colored");
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedUserId, setSelectedUserId] = useState<Barber["id"] | "all">(
+  const [selectedUserId, setSelectedUserId] = useState<IUser["id"] | "all">(
     "all",
   );
+  const [selectedUnidadeId, setSelectedUnidadeId] = useState<
+    IUnidade["id"] | "all"
+  >("all");
   const [localEvents, setLocalEvents] = useState<IEvent[]>(events);
 
   const handleSelectDate = (date: Date | undefined) => {
@@ -101,9 +113,12 @@ export function CalendarProvider({
         setSelectedDate: handleSelectDate,
         selectedUserId,
         setSelectedUserId,
+        selectedUnidadeId,
+        setSelectedUnidadeId,
         badgeVariant,
         setBadgeVariant,
         users,
+        unidades,
         configData,
         workingHours,
         visibleHours,

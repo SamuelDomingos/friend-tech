@@ -11,7 +11,6 @@ import { CalendarWeekView } from "./week-and-day-view/calendar-week-view";
 import { CalendarAgendaView } from "./agenda-view/calendar-agenda-view";
 import { CalendarYearView } from "./year-view/calendar-year-view";
 import { TCalendarView } from "../types";
-import { DndProviderWrapper } from "./dnd/dnd-provider";
 import { useCalendar } from "../contexts/calendar-context";
 
 interface IProps {
@@ -19,7 +18,8 @@ interface IProps {
 }
 
 export function ClientContainer({ view }: IProps) {
-  const { selectedDate, selectedUserId, events } = useCalendar();
+  const { selectedDate, selectedUserId, selectedUnidadeId, events } =
+    useCalendar();
 
   const filteredEvents = useMemo(() => {
     return events.filter(event => {
@@ -31,7 +31,8 @@ export function ClientContainer({ view }: IProps) {
         const yearEnd = new Date(selectedDate.getFullYear(), 11, 31, 23, 59, 59, 999);
         const isInSelectedYear = eventStartDate <= yearEnd && eventEndDate >= yearStart;
         const isUserMatch = selectedUserId === "all" || event.user.id === selectedUserId;
-        return isInSelectedYear && isUserMatch;
+        const isUnidadeMatch = selectedUnidadeId === "all" || event.unidadeId === selectedUnidadeId;
+        return isInSelectedYear && isUserMatch && isUnidadeMatch;
       }
 
       if (view === "month" || view === "agenda") {
@@ -39,7 +40,8 @@ export function ClientContainer({ view }: IProps) {
         const monthEnd = new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 0, 23, 59, 59, 999);
         const isInSelectedMonth = eventStartDate <= monthEnd && eventEndDate >= monthStart;
         const isUserMatch = selectedUserId === "all" || event.user.id === selectedUserId;
-        return isInSelectedMonth && isUserMatch;
+        const isUnidadeMatch = selectedUnidadeId === "all" || event.unidadeId === selectedUnidadeId;
+        return isInSelectedMonth && isUserMatch && isUnidadeMatch;
       }
 
       if (view === "week") {
@@ -55,7 +57,8 @@ export function ClientContainer({ view }: IProps) {
 
         const isInSelectedWeek = eventStartDate <= weekEnd && eventEndDate >= weekStart;
         const isUserMatch = selectedUserId === "all" || event.user.id === selectedUserId;
-        return isInSelectedWeek && isUserMatch;
+        const isUnidadeMatch = selectedUnidadeId === "all" || event.unidadeId === selectedUnidadeId;
+        return isInSelectedWeek && isUserMatch && isUnidadeMatch;
       }
 
       if (view === "day") {
@@ -63,10 +66,11 @@ export function ClientContainer({ view }: IProps) {
         const dayEnd = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), 23, 59, 59);
         const isInSelectedDay = eventStartDate <= dayEnd && eventEndDate >= dayStart;
         const isUserMatch = selectedUserId === "all" || event.user.id === selectedUserId;
-        return isInSelectedDay && isUserMatch;
+        const isUnidadeMatch = selectedUnidadeId === "all" || event.unidadeId === selectedUnidadeId;
+        return isInSelectedDay && isUserMatch && isUnidadeMatch;
       }
     });
-  }, [selectedDate, selectedUserId, events, view]);
+  }, [selectedDate, selectedUserId, selectedUnidadeId, events, view]);
 
   const singleDayEvents = filteredEvents.filter(event => {
     const startDate = parseISO(event.startDate);
@@ -91,13 +95,11 @@ export function ClientContainer({ view }: IProps) {
     <div className="overflow-hidden rounded-xl border">
       <CalendarHeader view={view} events={filteredEvents} />
 
-      <DndProviderWrapper>
-        {view === "day" && <CalendarDayView singleDayEvents={singleDayEvents} multiDayEvents={multiDayEvents} />}
-        {view === "month" && <CalendarMonthView singleDayEvents={singleDayEvents} multiDayEvents={multiDayEvents} />}
-        {view === "week" && <CalendarWeekView singleDayEvents={singleDayEvents} multiDayEvents={multiDayEvents} />}
-        {view === "year" && <CalendarYearView allEvents={eventStartDates} />}
-        {view === "agenda" && <CalendarAgendaView singleDayEvents={singleDayEvents} multiDayEvents={multiDayEvents} />}
-      </DndProviderWrapper>
+      {view === "day" && <CalendarDayView singleDayEvents={singleDayEvents} multiDayEvents={multiDayEvents} />}
+      {view === "month" && <CalendarMonthView singleDayEvents={singleDayEvents} multiDayEvents={multiDayEvents} />}
+      {view === "week" && <CalendarWeekView singleDayEvents={singleDayEvents} multiDayEvents={multiDayEvents} />}
+      {view === "year" && <CalendarYearView allEvents={eventStartDates} />}
+      {view === "agenda" && <CalendarAgendaView singleDayEvents={singleDayEvents} multiDayEvents={multiDayEvents} />}
     </div>
   );
 }

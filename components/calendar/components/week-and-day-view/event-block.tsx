@@ -10,7 +10,6 @@ import type { VariantProps } from "class-variance-authority";
 import { IEvent } from "../../interfaces";
 import { useCalendar } from "../../contexts/calendar-context";
 import { EventDetailsDialog } from "../dialogs/event-details-dialog";
-import { DraggableEvent } from "../dnd/draggable-event";
 
 const calendarWeekEventCardVariants = cva(
   "flex select-none flex-col gap-0.5 truncate whitespace-nowrap rounded-md border px-2 py-1.5 text-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",

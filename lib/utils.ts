@@ -15,3 +15,27 @@ export function formatCPF(cpf: string) {
 export function formatDate(date: string | Date) {
   return new Date(date).toLocaleDateString("pt-BR")
 }
+
+/** Formata um número como moeda brasileira (R$ 0,00). */
+export function formatCurrency(value: number) {
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(value)
+}
+
+/** Calcula a idade em anos completos a partir de uma data de nascimento. */
+export function calcularIdade(dataNascimento: Date) {
+  const hoje = new Date()
+  let idade = hoje.getFullYear() - dataNascimento.getFullYear()
+  const aindaNaoFezAniversario =
+    hoje.getMonth() < dataNascimento.getMonth() ||
+    (hoje.getMonth() === dataNascimento.getMonth() &&
+      hoje.getDate() < dataNascimento.getDate())
+
+  if (aindaNaoFezAniversario) {
+    idade -= 1
+  }
+
+  return idade
+}

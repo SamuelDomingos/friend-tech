@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   Columns,
@@ -11,10 +12,20 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { UserSelect } from "@/components/calendar/components/header/user-select";
+import { UnidadeSelect } from "@/components/calendar/components/header/unidade-select";
 import { TodayButton } from "@/components/calendar/components/header/today-button";
 import { DateNavigator } from "@/components/calendar/components/header/date-navigator";
-import { AddEventDialog } from "@/components/calendar/components/dialogs/add-event-dialog";
+import {
+  CreateAttendanceDialog,
+  type CreateAttendanceMode,
+} from "@/components/attendance-dialog";
 
 import type { IEvent } from "@/components/calendar/interfaces";
 import type { TCalendarView } from "@/components/calendar/types";
@@ -41,6 +52,16 @@ export function CalendarHeader({ view, events }: IProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const [createOpen, setCreateOpen] = useState(false);
+  const [createMode, setCreateMode] = useState<CreateAttendanceMode>(
+    "atendimento",
+  );
+
+  const abrirCriacao = (mode: CreateAttendanceMode) => {
+    setCreateMode(mode);
+    setCreateOpen(true);
+  };
 
   const setView = (v: TCalendarView) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -84,15 +105,32 @@ export function CalendarHeader({ view, events }: IProps) {
           </div>
 
           <UserSelect />
+          <UnidadeSelect />
         </div>
 
-        <AddEventDialog>
-          <Button className="w-full sm:w-auto">
-            <Plus />
-            Criar Agendamento
-          </Button>
-        </AddEventDialog>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button className="w-full sm:w-auto">
+              <Plus />
+              Adicionar agenda
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={() => abrirCriacao("atendimento")}>
+              Atendimento
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => abrirCriacao("urgencia")}>
+              Urgência
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
+
+      <CreateAttendanceDialog
+        open={createOpen}
+        onOpenChange={setCreateOpen}
+        mode={createMode}
+      />
     </div>
   );
 }

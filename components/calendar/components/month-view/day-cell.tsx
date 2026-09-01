@@ -5,7 +5,6 @@ import { isToday, startOfDay } from "date-fns";
 import { useCalendar } from "@/components/calendar/contexts/calendar-context";
 
 import { EventBullet } from "@/components/calendar/components/month-view/event-bullet";
-import { DroppableDayCell } from "@/components/calendar/components/dnd/droppable-day-cell";
 import { MonthEventBadge } from "@/components/calendar/components/month-view/month-event-badge";
 
 import { cn } from "@/lib/utils";
@@ -44,7 +43,6 @@ export function DayCell({ cell, events, eventPositions }: IProps) {
   };
 
   return (
-    <DroppableDayCell cell={cell}>
       <div
         className={cn(
           "flex h-full flex-col gap-1 border-l border-t py-1.5 lg:pb-2 lg:pt-1",
@@ -109,6 +107,5 @@ export function DayCell({ cell, events, eventPositions }: IProps) {
           </p>
         )}
       </div>
-    </DroppableDayCell>
   );
 }

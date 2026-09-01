@@ -11,11 +11,10 @@ import {
 } from "../../helpers";
 import { DayViewMultiDayEventsRow } from "./day-view-multi-day-events-row";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { DroppableTimeBlock } from "../dnd/droppable-time-block";
 import { AddEventDialog } from "../dialogs/add-event-dialog";
 import { EventBlock } from "./event-block";
 import { CalendarTimeline } from "./calendar-time-line";
-import DatePicker from "@/components/ui/date-picker";
+import { DatePicker } from "@/components/ui/date-picker";
 import { cn } from "@/lib/utils";
 import { ptBR } from "date-fns/locale";
 
@@ -107,59 +106,35 @@ export function CalendarDayView({ singleDayEvents, multiDayEvents }: IProps) {
                         <div className="pointer-events-none absolute inset-x-0 top-0 border-b"></div>
                       )}
 
-                      <DroppableTimeBlock
-                        date={selectedDate}
-                        hour={hour}
-                        minute={0}
+                      <AddEventDialog
+                        startDate={selectedDate}
+                        startTime={{ hour, minute: 0 }}
                       >
-                        <AddEventDialog
-                          startDate={selectedDate}
-                          startTime={{ hour, minute: 0 }}
-                        >
-                          <div className="absolute inset-x-0 top-0 h-[24px] cursor-pointer transition-colors hover:bg-accent" />
-                        </AddEventDialog>
-                      </DroppableTimeBlock>
+                        <div className="absolute inset-x-0 top-0 h-[24px] cursor-pointer transition-colors hover:bg-accent" />
+                      </AddEventDialog>
 
-                      <DroppableTimeBlock
-                        date={selectedDate}
-                        hour={hour}
-                        minute={15}
+                      <AddEventDialog
+                        startDate={selectedDate}
+                        startTime={{ hour, minute: 15 }}
                       >
-                        <AddEventDialog
-                          startDate={selectedDate}
-                          startTime={{ hour, minute: 15 }}
-                        >
-                          <div className="absolute inset-x-0 top-[24px] h-[24px] cursor-pointer transition-colors hover:bg-accent" />
-                        </AddEventDialog>
-                      </DroppableTimeBlock>
+                        <div className="absolute inset-x-0 top-[24px] h-[24px] cursor-pointer transition-colors hover:bg-accent" />
+                      </AddEventDialog>
 
                       <div className="pointer-events-none absolute inset-x-0 top-1/2 border-b border-dashed"></div>
 
-                      <DroppableTimeBlock
-                        date={selectedDate}
-                        hour={hour}
-                        minute={30}
+                      <AddEventDialog
+                        startDate={selectedDate}
+                        startTime={{ hour, minute: 30 }}
                       >
-                        <AddEventDialog
-                          startDate={selectedDate}
-                          startTime={{ hour, minute: 30 }}
-                        >
-                          <div className="absolute inset-x-0 top-[48px] h-[24px] cursor-pointer transition-colors hover:bg-accent" />
-                        </AddEventDialog>
-                      </DroppableTimeBlock>
+                        <div className="absolute inset-x-0 top-[48px] h-[24px] cursor-pointer transition-colors hover:bg-accent" />
+                      </AddEventDialog>
 
-                      <DroppableTimeBlock
-                        date={selectedDate}
-                        hour={hour}
-                        minute={45}
+                      <AddEventDialog
+                        startDate={selectedDate}
+                        startTime={{ hour, minute: 45 }}
                       >
-                        <AddEventDialog
-                          startDate={selectedDate}
-                          startTime={{ hour, minute: 45 }}
-                        >
-                          <div className="absolute inset-x-0 top-[72px] h-[24px] cursor-pointer transition-colors hover:bg-accent" />
-                        </AddEventDialog>
-                      </DroppableTimeBlock>
+                        <div className="absolute inset-x-0 top-[72px] h-[24px] cursor-pointer transition-colors hover:bg-accent" />
+                      </AddEventDialog>
                     </div>
                   );
                 })}
@@ -216,7 +191,11 @@ export function CalendarDayView({ singleDayEvents, multiDayEvents }: IProps) {
       </div>
 
       <div className="hidden w-64 divide-y border-l md:block">
-        <DatePicker selected={selectedDate} onSelect={setSelectedDate} />
+        <DatePicker
+          className="m-4 w-auto"
+          value={selectedDate}
+          onChange={setSelectedDate}
+        />
 
         <div className="flex-1 space-y-3">
           {currentEvents.length > 0 ? (
