@@ -1,4 +1,4 @@
-"use client"
+ "use client"
 
 import { useState } from "react"
 import { Plus, Trash2 } from "lucide-react"
@@ -88,7 +88,7 @@ export function ProcedimentosTab() {
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-end">
-        <Button onClick={adicionar}>
+        <Button type="button" onClick={adicionar}>
           <Plus className="size-4" />
           Adicionar
         </Button>
@@ -120,25 +120,11 @@ export function ProcedimentosTab() {
             ) : (
               procedimentos.map((proc) => (
                 <TableRow key={proc.id}>
-                  <TableCell>
-                    <Input
-                      value={proc.codigo}
-                      className="w-28 font-mono text-sm"
-                      placeholder="Código"
-                      onChange={(e) =>
-                        atualizar(proc.id, "codigo", e.target.value)
-                      }
-                    />
+                  <TableCell className="w-28 font-mono text-sm">
+                    {proc.codigo || "—"}
                   </TableCell>
-                  <TableCell>
-                    <Input
-                      value={proc.nomeExibicao}
-                      className="min-w-40"
-                      placeholder="Nome de exibição"
-                      onChange={(e) =>
-                        atualizar(proc.id, "nomeExibicao", e.target.value)
-                      }
-                    />
+                  <TableCell className="min-w-40">
+                    {proc.nomeExibicao || "—"}
                   </TableCell>
                   <TableCell>
                     <Select
@@ -188,9 +174,9 @@ export function ProcedimentosTab() {
                   </TableCell>
                   <TableCell className="text-right">
                     <Button
-                      variant="ghost"
+                      type="button"
+                      variant="destructive"
                       size="icon"
-                      className="size-8 text-destructive hover:text-destructive"
                       onClick={() => remover(proc.id)}
                     >
                       <Trash2 className="size-4" />

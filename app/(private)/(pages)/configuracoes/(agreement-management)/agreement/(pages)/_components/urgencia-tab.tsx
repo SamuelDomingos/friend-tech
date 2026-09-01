@@ -167,7 +167,7 @@ export function UrgenciaTab({ control }: UrgenciaTabProps) {
         <div className="flex items-center justify-between">
           <h3 className="text-base font-medium">Regras de urgência</h3>
 
-          <Button onClick={() => abrirModal()}>
+          <Button type="button" onClick={() => abrirModal()}>
             <Plus className="size-4" />
             Adicionar
           </Button>
@@ -292,7 +292,7 @@ export function UrgenciaTab({ control }: UrgenciaTabProps) {
               <FieldLabel htmlFor="urg-inicio">Hora Início</FieldLabel>
               <Input
                 id="urg-inicio"
-                placeholder="HH:mm"
+                type="time"
                 value={form.horaInicio}
                 onChange={(e) =>
                   setForm((f) => ({ ...f, horaInicio: e.target.value }))
@@ -304,7 +304,7 @@ export function UrgenciaTab({ control }: UrgenciaTabProps) {
               <FieldLabel htmlFor="urg-fim">Hora Fim</FieldLabel>
               <Input
                 id="urg-fim"
-                placeholder="HH:mm"
+                type="time"
                 value={form.horaFim}
                 onChange={(e) =>
                   setForm((f) => ({ ...f, horaFim: e.target.value }))

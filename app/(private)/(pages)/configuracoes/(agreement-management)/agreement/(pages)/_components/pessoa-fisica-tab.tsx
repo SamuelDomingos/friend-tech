@@ -18,6 +18,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   Table,
   TableBody,
@@ -129,7 +130,7 @@ export function PessoaFisicaTab() {
           </Button>
         </div>
 
-        <Button onClick={() => setModalOpen(true)}>
+        <Button type="button" onClick={() => setModalOpen(true)}>
           <Plus className="size-4" />
           Adicionar
         </Button>
@@ -233,6 +234,7 @@ export function PessoaFisicaTab() {
                     <TableCell>{regra.nomeContratado}</TableCell>
                     <TableCell className="text-right">
                       <Button
+                        type="button"
                         variant="ghost"
                         size="icon"
                         className="size-8 text-destructive hover:text-destructive"
@@ -250,7 +252,7 @@ export function PessoaFisicaTab() {
       </div>
 
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="sm:max-w-3xl">
+        <DialogContent className="grid max-h-[85vh] grid-rows-[auto_minmax(0,1fr)_auto] sm:max-w-4xl">
           <DialogHeader>
             <DialogTitle>Regra para Pessoa Física</DialogTitle>
             <DialogDescription>
@@ -258,35 +260,37 @@ export function PessoaFisicaTab() {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-6">
-            <div>
-              <p className="mb-2 text-sm font-medium">Profissionais</p>
-              <Transfer
-                disponiveisTitle="Disponíveis"
-                inclusosTitle="Selecionados"
-                searchPlaceholder="Buscar"
-                disponiveis={MEDICOS_DISPONIVEIS.filter(
-                  (m) => !profissionais.includes(m)
-                )}
-                inclusos={profissionais}
-                onIncludedChange={setProfissionais}
-              />
-            </div>
+          <ScrollArea className="min-h-0">
+            <div className="space-y-6 pr-4 pb-1">
+              <div>
+                <p className="mb-2 text-sm font-medium">Profissionais</p>
+                <Transfer
+                  disponiveisTitle="Disponíveis"
+                  inclusosTitle="Selecionados"
+                  searchPlaceholder="Buscar"
+                  disponiveis={MEDICOS_DISPONIVEIS.filter(
+                    (m) => !profissionais.includes(m)
+                  )}
+                  inclusos={profissionais}
+                  onIncludedChange={setProfissionais}
+                />
+              </div>
 
-            <div>
-              <p className="mb-2 text-sm font-medium">Atendimentos</p>
-              <Transfer
-                disponiveisTitle="Disponíveis"
-                inclusosTitle="Selecionados"
-                searchPlaceholder="Buscar"
-                disponiveis={ATENDIMENTOS_DISPONIVEIS.filter(
-                  (a) => !atendimentos.includes(a)
-                )}
-                inclusos={atendimentos}
-                onIncludedChange={setAtendimentos}
-              />
+              <div>
+                <p className="mb-2 text-sm font-medium">Atendimentos</p>
+                <Transfer
+                  disponiveisTitle="Disponíveis"
+                  inclusosTitle="Selecionados"
+                  searchPlaceholder="Buscar"
+                  disponiveis={ATENDIMENTOS_DISPONIVEIS.filter(
+                    (a) => !atendimentos.includes(a)
+                  )}
+                  inclusos={atendimentos}
+                  onIncludedChange={setAtendimentos}
+                />
+              </div>
             </div>
-          </div>
+          </ScrollArea>
 
           <DialogFooter>
             <Button

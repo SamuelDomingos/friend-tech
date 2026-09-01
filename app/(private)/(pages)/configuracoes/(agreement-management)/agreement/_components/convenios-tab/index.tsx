@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import {
   Download,
   MoreHorizontal,
@@ -35,6 +36,7 @@ import {
 import { conveniosMock, type Convenio } from "../dados-mock"
 
 export function ConveniosTab() {
+  const router = useRouter()
   const [convenios, setConvenios] = useState<Convenio[]>(conveniosMock)
   const [search, setSearch] = useState("")
 
@@ -117,14 +119,15 @@ export function ConveniosTab() {
               </TableRow>
             ) : (
               filtered.map((convenio) => (
-                <TableRow key={convenio.id}>
+                <TableRow
+                  key={convenio.id}
+                  className="cursor-pointer"
+                  onClick={() =>
+                    router.push(`/configuracoes/agreement/${convenio.id}`)
+                  }
+                >
                   <TableCell className="font-medium">
-                    <Link
-                      href={`/configuracoes/agreement/${convenio.id}`}
-                      className="hover:underline"
-                    >
-                      {convenio.nome}
-                    </Link>
+                    {convenio.nome}
                   </TableCell>
                   <TableCell className="text-muted-foreground">
                     {convenio.contractName || "—"}
@@ -132,7 +135,10 @@ export function ConveniosTab() {
                   <TableCell className="text-muted-foreground">
                     {formatarData(convenio.ultimaAtualizacao)}
                   </TableCell>
-                  <TableCell className="text-right">
+                  <TableCell
+                    className="text-right"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button

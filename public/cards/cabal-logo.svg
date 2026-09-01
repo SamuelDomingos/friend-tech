@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="700mm"
+   height="700mm"
+   viewBox="0 0 700 700"
+   version="1.1"
+   id="svg6829"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="cabal-logo.svg"
+   inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-0.png"
+   inkscape:export-xdpi="148.6263"
+   inkscape:export-ydpi="148.6263">
+  <defs
+     id="defs6823">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5568-5-3">
+      <path
+         d="m 105.108,170.233 c -0.17,0 -0.321,-0.109 -0.377,-0.27 v 0 l -0.782,-2.312 h 0.55 l 0.179,0.535 h 1.028 l 0.175,-0.535 h 0.549 l -0.874,2.582 z m 0.082,-0.403 0.386,-1.221 h -0.765 z"
+         id="path5566-4-1"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5558-6-5">
+      <path
+         d="m 106.906,170.271 c -0.161,0 -0.29,-0.13 -0.29,-0.29 v 0 -0.153 -2.177 h 1.664 v 0.43 h -1.14 v 1.747 0.443 z"
+         id="path5556-1-8"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5548-1-3">
+      <path
+         d="m 98.254,170.313 c -0.673,-0.007 -0.963,-0.28 -0.963,-0.748 v 0 -1.163 c 0,-0.467 0.29,-0.741 0.963,-0.748 v 0 -0.002 h 0.725 v 0.188 c 0,0.14 -0.115,0.256 -0.255,0.256 v 0 h -0.47 v 0.002 c -0.329,0.008 -0.438,0.125 -0.438,0.389 v 0 0.993 c 0,0.264 0.109,0.381 0.438,0.39 v 0 h 0.754 v 0.187 c 0,0.141 -0.114,0.256 -0.256,0.256 v 0 z"
+         id="path5546-6-4"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5538-7-9">
+      <path
+         d="m 101.911,170.233 v -2.582 h 1.165 c 0.503,0 0.757,0.229 0.757,0.593 v 0 0.276 c 0,0.252 -0.149,0.426 -0.404,0.477 v 0 c 0.212,0.085 0.309,0.205 0.309,0.418 v 0 0.267 c 0,0.35 -0.213,0.551 -0.737,0.551 v 0 z m 0.523,-0.403 h 0.504 c 0.192,0 0.276,-0.067 0.276,-0.209 v 0 -0.229 c 0,-0.152 -0.075,-0.241 -0.279,-0.241 v 0 h -0.501 z m 0,-1.07 h 0.584 c 0.208,0 0.291,-0.085 0.291,-0.26 v 0 -0.194 c 0,-0.19 -0.101,-0.252 -0.337,-0.252 v 0 h -0.538 z"
+         id="path5536-3-9"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5528-4-6">
+      <path
+         d="m 100.292,170.233 c -0.126,0 -0.235,-0.079 -0.276,-0.198 v 0 l -0.806,-2.384 h 0.549 l 0.179,0.535 h 1.028 l 0.174,-0.535 h 0.549 l -0.874,2.582 z m 0.158,-0.403 0.386,-1.221 h -0.766 z"
+         id="path5526-0-4"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5518-2-0">
+      <path
+         d="m 98.468,176.316 c -0.22,-0.217 -0.22,-0.572 0,-0.789 v 0 l 3.952,-3.881 -0.001,2.169 -1.856,1.833 c -0.153,0.15 -0.153,0.397 0,0.548 v 0 l 1.858,1.837 v 2.165 z"
+         id="path5516-7-2"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5508-7-0">
+      <path
+         d="m 103.15,178.033 1.858,-1.837 c 0.153,-0.151 0.153,-0.398 0,-0.548 v 0 l -1.855,-1.833 -0.001,-2.169 3.952,3.881 c 0.22,0.217 0.22,0.572 -0.001,0.789 v 0 l -3.953,3.882 z"
+         id="path5506-6-0"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5568-5">
+      <path
+         d="m 105.108,170.233 c -0.17,0 -0.321,-0.109 -0.377,-0.27 v 0 l -0.782,-2.312 h 0.55 l 0.179,0.535 h 1.028 l 0.175,-0.535 h 0.549 l -0.874,2.582 z m 0.082,-0.403 0.386,-1.221 h -0.765 z"
+         id="path5566-4"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5558-6">
+      <path
+         d="m 106.906,170.271 c -0.161,0 -0.29,-0.13 -0.29,-0.29 v 0 -0.153 -2.177 h 1.664 v 0.43 h -1.14 v 1.747 0.443 z"
+         id="path5556-1"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5548-1">
+      <path
+         d="m 98.254,170.313 c -0.673,-0.007 -0.963,-0.28 -0.963,-0.748 v 0 -1.163 c 0,-0.467 0.29,-0.741 0.963,-0.748 v 0 -0.002 h 0.725 v 0.188 c 0,0.14 -0.115,0.256 -0.255,0.256 v 0 h -0.47 v 0.002 c -0.329,0.008 -0.438,0.125 -0.438,0.389 v 0 0.993 c 0,0.264 0.109,0.381 0.438,0.39 v 0 h 0.754 v 0.187 c 0,0.141 -0.114,0.256 -0.256,0.256 v 0 z"
+         id="path5546-6"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5538-7">
+      <path
+         d="m 101.911,170.233 v -2.582 h 1.165 c 0.503,0 0.757,0.229 0.757,0.593 v 0 0.276 c 0,0.252 -0.149,0.426 -0.404,0.477 v 0 c 0.212,0.085 0.309,0.205 0.309,0.418 v 0 0.267 c 0,0.35 -0.213,0.551 -0.737,0.551 v 0 z m 0.523,-0.403 h 0.504 c 0.192,0 0.276,-0.067 0.276,-0.209 v 0 -0.229 c 0,-0.152 -0.075,-0.241 -0.279,-0.241 v 0 h -0.501 z m 0,-1.07 h 0.584 c 0.208,0 0.291,-0.085 0.291,-0.26 v 0 -0.194 c 0,-0.19 -0.101,-0.252 -0.337,-0.252 v 0 h -0.538 z"
+         id="path5536-3"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5528-4">
+      <path
+         d="m 100.292,170.233 c -0.126,0 -0.235,-0.079 -0.276,-0.198 v 0 l -0.806,-2.384 h 0.549 l 0.179,0.535 h 1.028 l 0.174,-0.535 h 0.549 l -0.874,2.582 z m 0.158,-0.403 0.386,-1.221 h -0.766 z"
+         id="path5526-0"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5518-2">
+      <path
+         d="m 98.468,176.316 c -0.22,-0.217 -0.22,-0.572 0,-0.789 v 0 l 3.952,-3.881 -0.001,2.169 -1.856,1.833 c -0.153,0.15 -0.153,0.397 0,0.548 v 0 l 1.858,1.837 v 2.165 z"
+         id="path5516-7"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5508-7">
+      <path
+         d="m 103.15,178.033 1.858,-1.837 c 0.153,-0.151 0.153,-0.398 0,-0.548 v 0 l -1.855,-1.833 -0.001,-2.169 3.952,3.881 c 0.22,0.217 0.22,0.572 -0.001,0.789 v 0 l -3.953,3.882 z"
+         id="path5506-6"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5498-5">
+      <path
+         d="M 95.778,181.452 V 166.07 h 12.182 c 1.23,0 2.229,0.997 2.229,2.229 v 0 13.153 z"
+         id="path5496-6"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.0875"
+     inkscape:cx="298.48771"
+     inkscape:cy="1134.5491"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1600"
+     inkscape:window-height="837"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata6826">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,403)">
+    <path
+       style="fill:#00538a;fill-opacity:1;stroke:none;stroke-width:5.13658476px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 1.685693,344.0833 H 714.30657 v 209.04307 c 0.19415,10.34856 -5.48675,22.09277 -15.91024,28.85152 -12.14067,7.87213 -17.80116,6.26718 -45.01318,6.32271 H 1.685693 Z"
+       id="path6737"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccsccc"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-4.png"
+       inkscape:export-xdpi="24.949986"
+       inkscape:export-ydpi="24.949986" />
+    <g
+       transform="matrix(28.115206,0,0,-28.115206,-2545.4023,4832.3263)"
+       id="g5492-9"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-5.png"
+       inkscape:export-xdpi="43.883007"
+       inkscape:export-ydpi="43.883007">
+      <g
+         id="g5494-1"
+         clip-path="url(#clipPath5498-5)">
+        <path
+           d="m 93.109,163.401 h 19.748 V 184.12 H 93.109 Z"
+           style="fill:#00538a;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path5500-8"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="matrix(28.115206,0,0,-28.115206,-2545.4023,4832.3263)"
+       id="g5502-4"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-5.png"
+       inkscape:export-xdpi="43.883007"
+       inkscape:export-ydpi="43.883007">
+      <g
+         id="g5504-0"
+         clip-path="url(#clipPath5508-7)">
+        <path
+           d="m 100.481,168.977 h 9.456 v 13.889 h -9.456 z"
+           style="fill:#fefefe;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path5510-3"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="matrix(28.115206,0,0,-28.115206,-2545.4023,4832.3263)"
+       id="g5512-9"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-5.png"
+       inkscape:export-xdpi="43.883007"
+       inkscape:export-ydpi="43.883007">
+      <g
+         id="g5514-9"
+         clip-path="url(#clipPath5518-2)">
+        <path
+           d="m 95.634,168.977 h 9.455 v 13.889 h -9.455 z"
+           style="fill:#fefefe;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path5520-2"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="matrix(28.115206,0,0,-28.115206,-2545.4023,4832.3263)"
+       id="g5522-2"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-5.png"
+       inkscape:export-xdpi="43.883007"
+       inkscape:export-ydpi="43.883007">
+      <g
+         id="g5524-7"
+         clip-path="url(#clipPath5528-4)">
+        <path
+           d="m 96.541,164.982 h 7.817 v 7.919 h -7.817 z"
+           style="fill:#fefefe;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path5530-0"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="matrix(28.115206,0,0,-28.115206,-2545.4023,4832.3263)"
+       id="g5532-8"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-5.png"
+       inkscape:export-xdpi="43.883007"
+       inkscape:export-ydpi="43.883007">
+      <g
+         id="g5534-9"
+         clip-path="url(#clipPath5538-7)">
+        <path
+           d="m 99.242,164.982 h 7.26 v 7.919 h -7.26 z"
+           style="fill:#fefefe;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path5540-3"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="matrix(28.115206,0,0,-28.115206,-2545.4023,4832.3263)"
+       id="g5542-6"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-5.png"
+       inkscape:export-xdpi="43.883007"
+       inkscape:export-ydpi="43.883007">
+      <g
+         id="g5544-6"
+         clip-path="url(#clipPath5548-1)">
+        <path
+           d="m 94.622,164.984 h 7.054 v 7.998 h -7.054 z"
+           style="fill:#fefefe;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path5550-9"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="matrix(28.115206,0,0,-28.115206,-2545.4023,4832.3263)"
+       id="g5552-1"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-5.png"
+       inkscape:export-xdpi="43.883007"
+       inkscape:export-ydpi="43.883007">
+      <g
+         id="g5554-2"
+         clip-path="url(#clipPath5558-6)">
+        <path
+           d="m 103.947,164.982 h 7.001 v 7.958 h -7.001 z"
+           style="fill:#fefefe;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path5560-5"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="matrix(28.115206,0,0,-28.115206,-2545.4023,4832.3263)"
+       id="g5562-2"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-5.png"
+       inkscape:export-xdpi="43.883007"
+       inkscape:export-ydpi="43.883007">
+      <g
+         id="g5564-9"
+         clip-path="url(#clipPath5568-5)">
+        <path
+           d="m 101.281,164.982 h 7.818 v 7.919 h -7.818 z"
+           style="fill:#fefefe;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path5570-1"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="matrix(18.818741,0,0,-18.818741,-1803.479,3775.1482)"
+       id="g5502-4-9"
+       style="fill:#ffffff"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-4.png"
+       inkscape:export-xdpi="24.949986"
+       inkscape:export-ydpi="24.949986">
+      <g
+         id="g5504-0-1"
+         clip-path="url(#clipPath5508-7-0)"
+         style="fill:#ffffff">
+        <path
+           d="m 100.481,168.977 h 9.456 v 13.889 h -9.456 z"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path5510-3-5"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="matrix(18.818741,0,0,-18.818741,-1803.479,3775.1482)"
+       id="g5512-9-5"
+       style="fill:#ffffff"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-4.png"
+       inkscape:export-xdpi="24.949986"
+       inkscape:export-ydpi="24.949986">
+      <g
+         id="g5514-9-3"
+         clip-path="url(#clipPath5518-2-0)"
+         style="fill:#ffffff">
+        <path
+           d="m 95.634,168.977 h 9.455 v 13.889 h -9.455 z"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path5520-2-5"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="matrix(37.576998,0,0,-37.576998,-3413.3483,6813.8798)"
+       id="g5522-2-1"
+       style="fill:#ffffff"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-4.png"
+       inkscape:export-xdpi="24.949986"
+       inkscape:export-ydpi="24.949986">
+      <g
+         id="g5524-7-8"
+         clip-path="url(#clipPath5528-4-6)"
+         style="fill:#ffffff">
+        <path
+           d="m 96.541,164.982 h 7.817 v 7.919 h -7.817 z"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path5530-0-8"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="matrix(37.576998,0,0,-37.576998,-3413.3483,6813.8798)"
+       id="g5532-8-5"
+       style="fill:#ffffff"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-4.png"
+       inkscape:export-xdpi="24.949986"
+       inkscape:export-ydpi="24.949986">
+      <g
+         id="g5534-9-0"
+         clip-path="url(#clipPath5538-7-9)"
+         style="fill:#ffffff">
+        <path
+           d="m 99.242,164.982 h 7.26 v 7.919 h -7.26 z"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path5540-3-1"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="matrix(37.576998,0,0,-37.576998,-3413.3483,6813.8798)"
+       id="g5542-6-4"
+       style="fill:#ffffff"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-4.png"
+       inkscape:export-xdpi="24.949986"
+       inkscape:export-ydpi="24.949986">
+      <g
+         id="g5544-6-7"
+         clip-path="url(#clipPath5548-1-3)"
+         style="fill:#ffffff">
+        <path
+           d="m 94.622,164.984 h 7.054 v 7.998 h -7.054 z"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path5550-9-3"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="matrix(37.576998,0,0,-37.576998,-3413.3483,6813.8798)"
+       id="g5552-1-1"
+       style="fill:#ffffff"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-4.png"
+       inkscape:export-xdpi="24.949986"
+       inkscape:export-ydpi="24.949986">
+      <g
+         id="g5554-2-8"
+         clip-path="url(#clipPath5558-6-5)"
+         style="fill:#ffffff">
+        <path
+           d="m 103.947,164.982 h 7.001 v 7.958 h -7.001 z"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path5560-5-8"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="matrix(37.576998,0,0,-37.576998,-3413.3483,6813.8798)"
+       id="g5562-2-0"
+       style="fill:#ffffff"
+       inkscape:export-filename="C:\Users\suitedoalex\sites\cabal-logo-4.png"
+       inkscape:export-xdpi="24.949986"
+       inkscape:export-ydpi="24.949986">
+      <g
+         id="g5564-9-2"
+         clip-path="url(#clipPath5568-5-3)"
+         style="fill:#ffffff">
+        <path
+           d="m 101.281,164.982 h 7.818 v 7.919 h -7.818 z"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path5570-1-3"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+  </g>
+</svg>

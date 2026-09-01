@@ -17,6 +17,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   Table,
   TableBody,
@@ -51,7 +52,7 @@ export function ProdutosTab() {
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-end">
-        <Button onClick={() => setModalOpen(true)}>
+        <Button type="button" onClick={() => setModalOpen(true)}>
           <Plus className="size-4" />
           Adicionar
         </Button>
@@ -81,9 +82,9 @@ export function ProdutosTab() {
                   <TableCell className="font-medium">{produto.nome}</TableCell>
                   <TableCell className="text-right">
                     <Button
-                      variant="ghost"
+                      type="button"
+                      variant="destructive"
                       size="icon"
-                      className="size-8 text-destructive hover:text-destructive"
                       onClick={() => remover(produto.id)}
                     >
                       <Trash2 className="size-4" />
@@ -97,7 +98,7 @@ export function ProdutosTab() {
       </div>
 
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="grid max-h-[85vh] grid-rows-[auto_minmax(0,1fr)_auto] sm:max-w-xl">
           <DialogHeader>
             <DialogTitle>Adicionar produto</DialogTitle>
             <DialogDescription>
@@ -105,15 +106,19 @@ export function ProdutosTab() {
             </DialogDescription>
           </DialogHeader>
 
-          <Field>
-            <FieldLabel htmlFor="produto-nome">Produto</FieldLabel>
-            <Input
-              id="produto-nome"
-              placeholder="Nome do produto"
-              value={nome}
-              onChange={(e) => setNome(e.target.value)}
-            />
-          </Field>
+          <ScrollArea className="min-h-0">
+            <div className="pr-4 pb-1">
+              <Field>
+                <FieldLabel htmlFor="produto-nome">Produto</FieldLabel>
+                <Input
+                  id="produto-nome"
+                  placeholder="Nome do produto"
+                  value={nome}
+                  onChange={(e) => setNome(e.target.value)}
+                />
+              </Field>
+            </div>
+          </ScrollArea>
 
           <DialogFooter>
             <Button

@@ -10,7 +10,6 @@ import {
   Landmark,
   LayoutGrid,
   Pill,
-  Share2,
   SlidersHorizontal,
   Sparkles,
   Stethoscope,
@@ -143,36 +142,43 @@ const gestaoConvenioItems: ConfigItem[] = [
     title: "Hospitais",
     description: "Gerenciamento de hospitais da sua clínica.",
     icon: Hospital,
+    href: "/configuracoes/hospital",
   },
   {
     title: "Materiais e medicamentos",
     description: "Gerenciamento de outras despesas de sua clínica.",
     icon: Pill,
+    href: "/configuracoes/expenses",
   },
   {
     title: "Solicitantes",
     description: "Gerenciamento e definição de regras de solicitantes.",
     icon: UserRound,
+    href: "/configuracoes/requesters",
   },
   {
     title: "Tabela de preços",
     description: "Gerenciamento de tabelas de preço da sua clínica.",
     icon: Table2,
+    href: "/configuracoes/price-tables",
   },
   {
     title: "Executantes",
     description: "Gerenciamento de médicos externos à sua clínica.",
     icon: Stethoscope,
+    href: "/configuracoes/external-doctors",
   },
   {
     title: "Procedimentos",
-    description: "Essa é a descrição do passo atual.",
+    description: "Nesta seção você pode gerenciar os procedimentos da sua clínica.",
     icon: ClipboardList,
+    href: "/configuracoes/procedures",
   },
   {
     title: "Regras de faturamento",
     description: "Gestão das regras de faturamento dos convênios.",
     icon: FileText,
+    href: "/configuracoes/billing-rules",
   },
 ]
 
@@ -182,28 +188,26 @@ const avancadasItems: ConfigItem[] = [
     description:
       "Visualização de ações especiais nos registros da sua clínica.",
     icon: Sparkles,
+    href: "/configuracoes/special-actions",
   },
   {
     title: "Campos obrigatórios",
     description:
       "Configuração dos campos de preenchimento obrigatório no agendamento ou cadastro de um paciente.",
     icon: ClipboardCheck,
+    href: "/configuracoes/required-fields",
   },
   {
     title: "Como conheceu",
     description: 'Gerenciamento das opções do campo "Como conheceu".',
     icon: UserPlus,
+    href: "/configuracoes/patient-sources",
   },
   {
     title: "Parametrização",
     description: "Gestão de módulos, tipos de prontuários, SMS e extras.",
     icon: SlidersHorizontal,
-  },
-  {
-    title: "Compartilhamentos",
-    description:
-      "Gestão de meus pacientes compartilhado e pacientes compartilhados da clínica.",
-    icon: Share2,
+    href: "/configuracoes/access-control",
   },
 ]
 

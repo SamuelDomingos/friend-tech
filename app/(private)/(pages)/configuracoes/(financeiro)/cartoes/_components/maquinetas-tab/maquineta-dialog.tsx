@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useState } from "react"
 import { useForm, Controller } from "react-hook-form"
 
@@ -29,12 +30,34 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 import { BANDEIRAS, CONTAS_BANCARIAS, FAVORECIDOS, GRUPOS_DISPONIVEIS, type Maquineta } from "../dados-mock"
 
 const requiredMark = (
   <span className="text-destructive text-xs font-normal">*</span>
 )
+
+const BANDEIRA_IMAGENS: Partial<Record<(typeof BANDEIRAS)[number], string>> = {
+  VISA: "/cards/visa.svg",
+  MASTERCARD: "/cards/mastercard.svg",
+  ELO: "/cards/elo.svg",
+  AMEX: "/cards/american-express.svg",
+  HIPERCARD: "/cards/hipercard.svg",
+  DINERS: "/cards/diners.svg",
+  MAESTRO: "/cards/maestro.svg",
+  JCB: "/cards/jcb.svg",
+  CUP: "/cards/unionpay.svg",
+  CREDZ: "/cards/CREDZ-Logo.svg",
+  BANRICOMPRAS: "/cards/Banricompras-Logo.svg",
+  SICREDI: "/cards/HORIZONTAL_PREFERENCIAL_COLORIDA_CMYK.jpg",
+  SOROCRED: "/cards/Sorocred Logo Vector.svg",
+  CREDSYSTEM: "/cards/credsystem-seeklogo.png",
+  BANESCARD: "/cards/banescard-logo.svg",
+  CABAL: "/cards/cabal-logo.svg",
+  AGIPLAN: "/cards/Agiplan-Logo-1-5274.png",
+}
 
 interface MaquinetaDialogProps {
   open: boolean
@@ -68,7 +91,7 @@ export function MaquinetaDialog({ open, onOpenChange, maquineta }: MaquinetaDial
   })
 
   const tipo = watch("tipo")
-  const bandeiras = watch("bandeiras")
+  const qtdMaxParcelas = watch("qtdMaxParcelas")
 
   const onSubmit = () => {
     onOpenChange(false)
@@ -76,13 +99,13 @@ export function MaquinetaDialog({ open, onOpenChange, maquineta }: MaquinetaDial
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl flex flex-col">
+      <DialogContent className="grid max-h-[85vh] grid-rows-[auto_minmax(0,1fr)_auto] sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle>{isEdit ? "Editar maquineta" : "Adicionar maquineta"}</DialogTitle>
         </DialogHeader>
 
-        <ScrollArea className="flex-1 min-h-0 max-h-auto">
-          <div className="space-y-6 pr-4">
+        <ScrollArea className="min-h-0">
+          <div className="space-y-6 pr-4 pb-1">
             {!isEdit && (
               <div className="space-y-2">
                 <Label className="text-sm font-medium">Configurações da maquineta</Label>
@@ -308,11 +331,16 @@ export function MaquinetaDialog({ open, onOpenChange, maquineta }: MaquinetaDial
                           -
                         </Button>
                         <Input
-                          type="number"
-                          min={1}
-                          max={24}
-                          value={field.value}
-                          onChange={(e) => field.onChange(Number(e.target.value))}
+                          type="text"
+                          inputMode="numeric"
+                          value={field.value === 0 ? "" : field.value}
+                          onChange={(e) => {
+                            const digits = e.target.value.replace(/\D/g, "").slice(0, 2)
+                            field.onChange(digits === "" ? 0 : Math.min(24, Number(digits)))
+                          }}
+                          onBlur={() => {
+                            if (!field.value) field.onChange(1)
+                          }}
                           className="w-20 text-center"
                         />
                         <Button
@@ -388,19 +416,51 @@ export function MaquinetaDialog({ open, onOpenChange, maquineta }: MaquinetaDial
               <div className="space-y-6">
                 <div className="space-y-2">
                   <FieldLabel>Selecione as bandeiras aceitas {requiredMark}</FieldLabel>
-                  <div className="flex flex-wrap gap-2">
-                    {BANDEIRAS.map((bandeira) => (
-                      <Button
-                        key={bandeira}
-                        type="button"
+                  <Controller
+                    name="bandeiras"
+                    control={control}
+                    render={({ field }) => (
+                      <ToggleGroup
+                        type="multiple"
                         variant="outline"
-                        size="sm"
-                        className={bandeiras.includes(bandeira) ? "border-primary bg-primary/10" : ""}
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        className="w-full flex-wrap"
                       >
-                        {bandeira}
-                      </Button>
-                    ))}
-                  </div>
+                        {BANDEIRAS.map((bandeira) => {
+                          const imagem = BANDEIRA_IMAGENS[bandeira]
+
+                          return (
+                            <Tooltip key={bandeira}>
+                              <TooltipTrigger asChild>
+                                <ToggleGroupItem
+                                  value={bandeira}
+                                  className="h-7 w-14 shrink-0 justify-center overflow-hidden px-1 aria-pressed:border-primary aria-pressed:bg-primary/80 aria-pressed:text-primary-foreground data-[state=on]:border-primary data-[state=on]:bg-primary/80 data-[state=on]:text-primary-foreground"
+                                >
+                                  {imagem ? (
+                                    <span className="relative block h-4 w-full">
+                                      <Image
+                                        src={imagem}
+                                        alt={bandeira}
+                                        fill
+                                        sizes="56px"
+                                        className="object-contain"
+                                      />
+                                    </span>
+                                  ) : (
+                                    <span className="truncate text-[9px] font-medium leading-none">
+                                      {bandeira}
+                                    </span>
+                                  )}
+                                </ToggleGroupItem>
+                              </TooltipTrigger>
+                              <TooltipContent>{bandeira}</TooltipContent>
+                            </Tooltip>
+                          )
+                        })}
+                      </ToggleGroup>
+                    )}
+                  />
                 </div>
 
                 <div className="space-y-2">
@@ -432,7 +492,7 @@ export function MaquinetaDialog({ open, onOpenChange, maquineta }: MaquinetaDial
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className="grid gap-4 sm:grid-cols-6 px-2 pb-4">
-                          {Array.from({ length: 12 }, (_, i) => (
+                          {Array.from({ length: Math.min(24, Math.max(0, qtdMaxParcelas || 0)) }, (_, i) => (
                             <Field key={i}>
                               <FieldLabel className="text-xs">Taxa {i + 1}x</FieldLabel>
                               <InputGroup>
