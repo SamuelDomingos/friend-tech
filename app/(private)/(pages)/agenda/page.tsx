@@ -1,7 +1,6 @@
-import { CalendarProvider } from "@/components/calendar/contexts/calendar-context"
-import { ClientContainer } from "@/components/calendar/components/client-container"
-import type { TCalendarView } from "@/components/calendar/types"
-
+import { AgendaTabs } from "./_components/agenda-tabs"
+import { CalendarProvider } from "./_components/calendar/contexts/calendar-context"
+import { TCalendarView } from "./_components/calendar/types"
 import {
   eventsMock,
   professionalsMock,
@@ -32,7 +31,7 @@ export default async function AgendaPage({ searchParams }: AgendaPageProps) {
         events={eventsMock}
         configData={null}
       >
-        <ClientContainer view={view} />
+        <AgendaTabs view={view} />
       </CalendarProvider>
     </div>
   )
