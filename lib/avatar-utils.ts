@@ -12,3 +12,12 @@ export function getAvatarType(value?: string | null) {
   if (isSolidColorAvatar(value)) return "color"
   return value
 }
+
+export function iniciais(nome: string): string {
+  return nome
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((parte) => parte[0]?.toUpperCase() ?? "")
+    .join("")
+}

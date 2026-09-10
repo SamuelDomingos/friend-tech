@@ -26,6 +26,10 @@ const breadcrumbs: Record<
   "/": { label: "Bem-vindo" },
   "/agenda": { label: "Agenda" },
   "/pacientes": { label: "Pacientes" },
+  "/pacientes/novo": {
+    label: "Novo paciente",
+    parent: { label: "Pacientes", href: "/pacientes" },
+  },
   "/laudo": { label: "Laudo" },
   "/convenio": { label: "Convênio" },
   "/financeiro": { label: "Financeiro" },

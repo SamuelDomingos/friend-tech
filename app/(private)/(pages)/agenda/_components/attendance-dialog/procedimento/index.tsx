@@ -10,7 +10,7 @@ import { Item, ItemContent, ItemGroup, ItemTitle } from "@/components/ui/item"
 import { Popover, PopoverAnchor, PopoverContent } from "@/components/ui/popover"
 import { formatCurrency } from "@/lib/utils"
 
-import { ProcedureSearch, parsePrecoParticular } from "./procedure-search"
+import { ProcedureSearch, parsePrecoParticular } from "@/components/procedure-search"
 import type { ProcedimentoItem } from "../mock-data"
 
 import { TIPOS_ATENDIMENTO } from "@/app/(private)/(pages)/configuracoes/(geral)/agenda/_components/_shared/tipos-atendimento"
