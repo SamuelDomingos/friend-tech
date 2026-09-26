@@ -33,6 +33,7 @@ export function DatePicker({
         <Button
           type="button"
           variant="outline"
+          size="sm"
           disabled={disabled}
           data-empty={!value}
           className={cn(

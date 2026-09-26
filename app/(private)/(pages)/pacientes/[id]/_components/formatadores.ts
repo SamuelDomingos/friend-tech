@@ -62,3 +62,19 @@ export function tempoRelativo(iso: string): string {
   }
   return `há ${diffAnos} ${diffAnos > 1 ? "anos" : "ano"}`
 }
+
+export function dataCurta(iso: string): string {
+  const d = dataDeISO(iso)
+  const dia = String(d.getDate()).padStart(2, "0")
+  const mes = String(d.getMonth() + 1).padStart(2, "0")
+  return `${dia}/${mes}/${d.getFullYear()}`
+}
+
+export function formatarMoeda(valor: number, comSimbolo = true): string {
+  return valor.toLocaleString("pt-BR", {
+    style: comSimbolo ? "currency" : "decimal",
+    currency: "BRL",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })
+}

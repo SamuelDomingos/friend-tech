@@ -4,6 +4,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 import { PacienteHeader } from "./_components/paciente-header"
 import { AbaPlaceholder } from "./_components/aba-placeholder"
+import { ContasTab } from "./_components/contas-tab"
+import { OrcamentosTab } from "./_components/orcamentos-tab"
 import { ProntuarioTab } from "./_components/prontuario-tab"
 import { getProntuarioPorPaciente } from "./_components/dados-mock"
 
@@ -27,6 +29,7 @@ export default async function PacienteDetailPage({
         <TabsList variant="line" className="flex-wrap">
           <TabsTrigger value="prontuario">Prontuário</TabsTrigger>
           <TabsTrigger value="contas">Contas</TabsTrigger>
+          <TabsTrigger value="orcamentos">Orçamentos</TabsTrigger>
           <TabsTrigger value="sessoes">Sessões</TabsTrigger>
           <TabsTrigger value="consumo">Consumo</TabsTrigger>
           <TabsTrigger value="atualizacoes">Atualizações</TabsTrigger>
@@ -38,10 +41,11 @@ export default async function PacienteDetailPage({
         </TabsContent>
 
         <TabsContent value="contas" className="mt-4">
-          <AbaPlaceholder
-            titulo="Contas"
-            descricao="Lançamentos financeiros do paciente."
-          />
+          <ContasTab paciente={paciente} />
+        </TabsContent>
+
+        <TabsContent value="orcamentos" className="mt-4">
+          <OrcamentosTab paciente={paciente} />
         </TabsContent>
 
         <TabsContent value="sessoes" className="mt-4">
