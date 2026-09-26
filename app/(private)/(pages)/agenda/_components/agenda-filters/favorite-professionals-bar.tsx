@@ -59,7 +59,7 @@ export function FavoriteProfessionalsBar() {
         <TooltipTrigger asChild>
           <Button
             type="button"
-            size="icon"
+            size="icon-sm"
             variant={viewAll ? "default" : "outline"}
             onClick={() => setViewAll((atual) => !atual)}
           >
@@ -73,7 +73,7 @@ export function FavoriteProfessionalsBar() {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button type="button" size="icon" variant="outline" onClick={() => setDialogOpen(true)}>
+          <Button type="button" size="icon-sm" variant="outline" onClick={() => setDialogOpen(true)}>
             <Stethoscope />
           </Button>
         </TooltipTrigger>

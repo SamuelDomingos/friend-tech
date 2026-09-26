@@ -84,7 +84,7 @@ export function ProdutosTab() {
                     <Button
                       type="button"
                       variant="destructive"
-                      size="icon"
+                      size="icon-sm"
                       onClick={() => remover(produto.id)}
                     >
                       <Trash2 className="size-4" />

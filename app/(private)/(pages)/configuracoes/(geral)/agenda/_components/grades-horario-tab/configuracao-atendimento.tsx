@@ -161,7 +161,7 @@ export function ConfiguracaoAtendimento({
                   <Button
                     type="button"
                     variant="outline"
-                    size="icon"
+                    size="icon-sm"
                     onClick={() => copiarHorarios(dia.key)}
                     disabled={!ativo || !temOutroAtivo}
                     aria-label={`Copiar horário de ${dia.rotulo} para os outros dias ativos`}

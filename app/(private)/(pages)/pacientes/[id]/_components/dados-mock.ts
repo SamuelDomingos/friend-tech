@@ -30,7 +30,6 @@ export type TipoRegistro =
   | "SOLICITACAO_EXAME_GUIA"
   | "LAUDO"
   | "ATESTADO"
-  | "ORCAMENTO"
   | "QUESTIONARIO"
 
 export const TIPOS_REGISTRO: { value: TipoRegistro; rotulo: string }[] = [
@@ -44,7 +43,6 @@ export const TIPOS_REGISTRO: { value: TipoRegistro; rotulo: string }[] = [
   { value: "SOLICITACAO_EXAME_GUIA", rotulo: "Solicitação de exames com guia" },
   { value: "LAUDO", rotulo: "Laudo" },
   { value: "ATESTADO", rotulo: "Atestado, Declaração e Outros" },
-  { value: "ORCAMENTO", rotulo: "Orçamento" },
   { value: "QUESTIONARIO", rotulo: "Questionário Paciente" },
 ]
 
@@ -54,8 +52,9 @@ export const rotuloRegistro = (tipo: TipoRegistro) =>
 export interface Arquivo {
   id: string
   nome: string
-  tipo: "imagem" | "pdf"
+  tipo: "imagem" | "pdf" | "outro"
   url?: string
+  descricao?: string
 }
 
 export interface Comentario {
@@ -110,7 +109,6 @@ export const barraGruposMock: BarraGrupo[] = [
       { tipo: "SOLICITACAO_EXAME_GUIA", ativo: true },
       { tipo: "LAUDO", ativo: true },
       { tipo: "ATESTADO", ativo: true },
-      { tipo: "ORCAMENTO", ativo: true },
     ],
   },
   {
@@ -129,6 +127,52 @@ export const equipeMock: Profissional[] = [
 
 export const etiquetasMock: Etiqueta[] = [
   { id: "e1", nome: "Retorno em 30 dias" },
+]
+
+export const medicamentosMock: string[] = [
+  "Amoxicilina 500mg",
+  "Complexo B",
+  "Cetoconazol creme 2%",
+  "Dipirona Sódica 500mg",
+  "Enalapril 10mg",
+  "Ibuprofeno 600mg",
+  "Losartana Potássica 50mg",
+  "Metformina 850mg",
+  "Nistatina creme",
+  "Omeprazol 20mg",
+  "Paracetamol 750mg",
+  "Sinvastatina 20mg",
+]
+
+export const conveniosGuiaMock: string[] = [
+  "UNIMED",
+  "AMIL",
+  "BRADESCO",
+  "CAMED",
+  "SUL AMÉRICA",
+]
+
+export const carateresGuiaMock: string[] = [
+  "01 - Eletivo",
+  "02 - Emergência",
+]
+
+export interface ProcedimentoExame {
+  codigo: string
+  descricao: string
+}
+
+export const procedimentosExameMock: ProcedimentoExame[] = [
+  { codigo: "40304361", descricao: "Hemograma completo" },
+  { codigo: "40304388", descricao: "Glicemia de jejum" },
+  { codigo: "40304418", descricao: "Colesterol total e frações" },
+  { codigo: "40304426", descricao: "Triglicerídeos" },
+  { codigo: "40304515", descricao: "TSH - Hormônio tireoestimulante" },
+  { codigo: "40304523", descricao: "T4 livre" },
+  { codigo: "40302080", descricao: "Creatinina" },
+  { codigo: "40302110", descricao: "Ureia" },
+  { codigo: "40316305", descricao: "Ultrassonografia abdominal total" },
+  { codigo: "40901156", descricao: "Eletrocardiograma (ECG)" },
 ]
 
 export type CampoFormulario =
@@ -232,6 +276,33 @@ export const camposAnamneseMock: CampoFormulario[] = [
       "Uma vez a cada 15 dias ou mais",
     ],
   },
+]
+
+export const camposQuestionarioMock: CampoFormulario[] = [
+  { id: "objetivo", tipo: "INPUT", titulo: "Objetivo:" },
+  { id: "sintomas", tipo: "INPUT", titulo: "Sintomas:" },
+  { id: "alergias", tipo: "INPUT", titulo: "Alergia / Intolerância:" },
+  { id: "patologias", tipo: "INPUT", titulo: "Patologias:" },
+  { id: "medicacoes", tipo: "INPUT", titulo: "Medicações" },
+  { id: "cirurgia", tipo: "INPUT", titulo: "Cirurgia:" },
+  {
+    id: "historicoFamiliar",
+    tipo: "INPUT",
+    titulo: "Histórico de Doenças familiares",
+  },
+  { id: "sono", tipo: "INPUT", titulo: "Sono:" },
+  { id: "libido", tipo: "INPUT", titulo: "Libido:" },
+  { id: "fadiga", tipo: "INPUT", titulo: "Fadiga:" },
+  { id: "fluxoMenstrual", tipo: "INPUT", titulo: "Fluxo menstrual:" },
+  { id: "atividadeFisica", tipo: "INPUT", titulo: "Atividade física:" },
+  { id: "filhos", tipo: "INPUT", titulo: "Filhos:", placeholder: "0" },
+  { id: "ocupacao", tipo: "INPUT", titulo: "Ocupação" },
+  { id: "frequenciaAlimentar", tipo: "INPUT", titulo: "Freqüência Alimentar" },
+  { id: "cafeDaManha", tipo: "INPUT", titulo: "Café da manhã:" },
+  { id: "lancheDaManha", tipo: "INPUT", titulo: "Lanche da manhã:" },
+  { id: "almoco", tipo: "INPUT", titulo: "Almoço:" },
+  { id: "lancheDaTarde", tipo: "INPUT", titulo: "Lanche da tarde:" },
+  { id: "jantar", tipo: "INPUT", titulo: "Jantar:" },
 ]
 
 export interface ProntuarioDados {

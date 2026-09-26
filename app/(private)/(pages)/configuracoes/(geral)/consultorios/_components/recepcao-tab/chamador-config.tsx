@@ -105,7 +105,7 @@ export function ChamadorConfig({
                     <Button
                       type="button"
                       variant="ghost"
-                      size="icon-xs"
+                      size="icon-sm"
                       onClick={atualizarCodigo}
                       aria-label="Atualizar código de chamado"
                     >
@@ -121,7 +121,7 @@ export function ChamadorConfig({
                     <Button
                       type="button"
                       variant="ghost"
-                      size="icon-xs"
+                      size="icon-sm"
                       onClick={copiarCodigo}
                       aria-label="Copiar código de chamado"
                     >

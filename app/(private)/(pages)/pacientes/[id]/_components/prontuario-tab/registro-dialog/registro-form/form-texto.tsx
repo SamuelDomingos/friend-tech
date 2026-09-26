@@ -15,7 +15,7 @@ export function FormTexto({
     <RichTextEditor
       value={value}
       onChange={onChange}
-      className="min-h-[200px]"
+      className="min-h-50"
     />
   )
 }

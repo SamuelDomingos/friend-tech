@@ -15,6 +15,11 @@ import {
 
 import { Button } from "@/components/ui/button"
 import { ButtonGroup, ButtonGroupSeparator } from "@/components/ui/button-group"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
 
 interface RichTextEditorProps {
@@ -35,16 +40,21 @@ function ToolbarButton({
   icon: typeof Bold
 }) {
   return (
-    <Button
-      type="button"
-      variant="ghost"
-      size="icon-xs"
-      onClick={onClick}
-      aria-label={label}
-      className={cn(active && "bg-accent text-accent-foreground")}
-    >
-      <Icon />
-    </Button>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          type="button"
+          variant="secondary"
+          size="icon-sm"
+          onClick={onClick}
+          aria-label={label}
+          aria-pressed={active}
+        >
+          <Icon />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>{label}</TooltipContent>
+    </Tooltip>
   )
 }
 
@@ -73,7 +83,7 @@ export function RichTextEditor({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-lg border bg-background",
+        "overflow-hidden rounded-lg border",
         className
       )}
     >

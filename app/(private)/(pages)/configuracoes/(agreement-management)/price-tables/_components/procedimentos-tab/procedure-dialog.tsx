@@ -502,7 +502,7 @@ function ProcedureForm({ table, onSave, onCancel }: ProcedureFormProps) {
                       </Field>
                       <Button
                         type="button"
-                        size="icon"
+                        size="icon-sm"
                         onClick={adicionarRegraAmb}
                       >
                         <Plus className="size-4" />

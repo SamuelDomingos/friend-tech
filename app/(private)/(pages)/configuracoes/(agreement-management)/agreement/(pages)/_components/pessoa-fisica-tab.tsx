@@ -172,7 +172,7 @@ export function PessoaFisicaTab() {
                     <TableCell className="text-right">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="outline" size="icon" aria-label="Ações">
+                          <Button variant="outline" size="icon-sm" aria-label="Ações">
                             <MoreHorizontal className="size-4" />
                           </Button>
                         </DropdownMenuTrigger>
@@ -236,7 +236,7 @@ export function PessoaFisicaTab() {
                       <Button
                         type="button"
                         variant="ghost"
-                        size="icon"
+                        size="icon-sm"
                         className="size-8 text-destructive hover:text-destructive"
                         onClick={() => removerFaturar(regra.id)}
                       >

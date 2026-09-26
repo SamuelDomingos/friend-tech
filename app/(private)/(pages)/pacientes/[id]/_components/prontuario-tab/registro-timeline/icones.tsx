@@ -9,12 +9,11 @@ import {
   Lock,
   Paperclip,
   Pill,
-  Receipt,
   Stethoscope,
   type LucideIcon,
 } from "lucide-react"
 
-import type { TipoRegistro } from "../dados-mock"
+import type { TipoRegistro } from "../../dados-mock"
 import { cn } from "@/lib/utils"
 
 const ICONES: Record<TipoRegistro, LucideIcon> = {
@@ -28,7 +27,6 @@ const ICONES: Record<TipoRegistro, LucideIcon> = {
   SOLICITACAO_EXAME_GUIA: FileSearch,
   LAUDO: ClipboardCheck,
   ATESTADO: FileText,
-  ORCAMENTO: Receipt,
   QUESTIONARIO: ListChecks,
 }
 

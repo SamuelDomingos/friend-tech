@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-import type { CampoFormulario } from "../../dados-mock"
+import type { CampoFormulario } from "../../../dados-mock"
 
 interface RegistroCamposProps {
   campos: CampoFormulario[]

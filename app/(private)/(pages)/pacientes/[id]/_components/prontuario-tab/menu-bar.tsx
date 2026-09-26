@@ -4,6 +4,7 @@ import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { ButtonGroup } from "@/components/ui/button-group"
+import { Card, CardContent } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import {
@@ -15,11 +16,12 @@ import { cn } from "@/lib/utils"
 
 import type { BarraGrupo, TipoRegistro } from "../dados-mock"
 import { rotuloRegistro } from "../dados-mock"
-import { RegistroIcone } from "./registro-icones"
+import { RegistroIcone } from "./registro-timeline/icones"
 
 interface RegistroMenuBarProps {
   grupos: BarraGrupo[]
   edicao: boolean
+  selecao?: boolean
   estaAtivo: (grupoId: string, tipo: TipoRegistro) => boolean
   onAlternarAtivo: (grupoId: string, tipo: TipoRegistro) => void
   onSelecionar?: (tipo: TipoRegistro) => void
@@ -28,13 +30,15 @@ interface RegistroMenuBarProps {
 export function RegistroMenuBar({
   grupos,
   edicao,
+  selecao = false,
   estaAtivo,
   onAlternarAtivo,
   onSelecionar,
 }: RegistroMenuBarProps) {
   return (
-    <div className="rounded-lg border bg-card px-4 py-3">
-      <div className="flex items-start justify-between gap-4">
+    <Card size="sm" className="gap-0 py-0">
+      <CardContent className="px-4 py-3">
+        <div className="flex items-start justify-between gap-4">
         <ScrollArea className="max-w-full">
           <div className="flex items-start gap-6">
             {grupos.map((grupo) => (
@@ -55,6 +59,7 @@ export function RegistroMenuBar({
                             variant="outline"
                             size="icon-sm"
                             aria-label={rotuloRegistro(item.tipo)}
+                            aria-pressed={selecao ? ativo : undefined}
                             className={cn(
                               "relative",
                               edicao &&
@@ -100,7 +105,8 @@ export function RegistroMenuBar({
             ))}
           </div>
         </ScrollArea>
-      </div>
-    </div>
+        </div>
+      </CardContent>
+    </Card>
   )
 }

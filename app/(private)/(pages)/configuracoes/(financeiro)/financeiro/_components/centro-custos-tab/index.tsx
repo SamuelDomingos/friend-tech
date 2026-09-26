@@ -19,7 +19,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { cn } from "@/lib/utils"
 
 import {
   centrosCustoMock,
@@ -72,9 +71,7 @@ export function CentroCustosTab() {
             type="button"
             variant="ghost"
             size="sm"
-            className={cn(
-              modo === "centro-custo" && "bg-accent text-accent-foreground"
-            )}
+            aria-pressed={modo === "centro-custo"}
             onClick={() => setModo("centro-custo")}
           >
             Centro de Custo
@@ -84,9 +81,7 @@ export function CentroCustosTab() {
             type="button"
             variant="ghost"
             size="sm"
-            className={cn(
-              modo === "modelos" && "bg-accent text-accent-foreground"
-            )}
+            aria-pressed={modo === "modelos"}
             onClick={() => setModo("modelos")}
           >
             Modelos
@@ -132,7 +127,7 @@ export function CentroCustosTab() {
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="outline"
-                          size="icon"
+                          size="icon-sm"
                           aria-label="Ações"
                         >
                           <MoreHorizontal className="size-4" />

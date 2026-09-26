@@ -108,7 +108,7 @@ export function GruposTab() {
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="outline"
-                          size="icon"
+                          size="icon-sm"
                           aria-label="Ações"
                         >
                           <MoreHorizontal className="size-4" />

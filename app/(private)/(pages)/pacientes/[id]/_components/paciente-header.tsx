@@ -62,7 +62,7 @@ export function PacienteHeader({ paciente }: PacienteHeaderProps) {
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="secondary"
-                  size="icon-xs"
+                  size="icon-sm"
                   className="absolute -right-1 -bottom-1 size-5 rounded-full shadow-sm"
                   aria-label="Alterar foto"
                 >
@@ -89,7 +89,7 @@ export function PacienteHeader({ paciente }: PacienteHeaderProps) {
               <Button
                 type="button"
                 variant="ghost"
-                size="icon-lg"
+                size="icon-sm"
                 className="text-amber-500 hover:text-amber-500"
                 aria-label="Alternar VIP"
                 onClick={() => {
@@ -102,7 +102,7 @@ export function PacienteHeader({ paciente }: PacienteHeaderProps) {
 
               {paciente.notaHeader && (
                 <Button
-                  size="icon-lg"
+                  size="icon-sm"
                   aria-label="Nota do paciente"
                 >
                   <StickyNote className="size-4" />

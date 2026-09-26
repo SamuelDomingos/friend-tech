@@ -5,12 +5,26 @@ import { Check, ChevronDown, Search, Users } from "lucide-react"
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
+import { ButtonGroup } from "@/components/ui/button-group"
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group"
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item"
 import {
   Popover,
   PopoverContent,
@@ -21,9 +35,8 @@ import { cn } from "@/lib/utils"
 import { iniciais } from "@/lib/avatar-utils"
 
 import type { ResumoEvolucao, Agrupamento } from "../../_hooks/use-prontuario"
-import type { Profissional } from "../dados-mock"
-import { RegistroIcone } from "./registro-icones"
-import type { TipoRegistro } from "../dados-mock"
+import type { Profissional, TipoRegistro } from "../dados-mock"
+import { RegistroIcone } from "./registro-timeline/icones"
 
 interface EvolucoesPanelProps {
   agrupamento: Agrupamento
@@ -57,125 +70,158 @@ export function EvolucoesPanel({
   )
 
   const ativo = (chave: string) =>
-    agrupamento === "tipo"
-      ? filtroTipo === chave
-      : filtroData === chave
+    agrupamento === "tipo" ? filtroTipo === chave : filtroData === chave
 
   return (
-    <div className="rounded-lg border bg-card p-3">
-      <p className="mb-3 text-sm font-medium">Histórico de evoluções</p>
+    <Card size="sm" className="gap-3 p-3">
+      <CardHeader className="p-0">
+        <CardTitle className="text-sm font-medium">
+          Histórico de evoluções
+        </CardTitle>
+      </CardHeader>
 
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-muted-foreground">Agrupar por:</span>
-          <div className="flex gap-1 rounded-lg border bg-muted p-0.5">
-            {(["tipo", "data"] as Agrupamento[]).map((valor) => (
-              <button
-                key={valor}
-                type="button"
-                onClick={() => onAgrupamentoChange(valor)}
-                className={cn(
-                  "rounded-md px-2 py-1 text-xs font-medium capitalize transition-colors",
-                  agrupamento === valor
-                    ? "bg-background text-foreground shadow-sm"
-                    : "text-muted-foreground"
-                )}
-              >
-                {valor === "tipo" ? "Tipo" : "Data"}
-              </button>
-            ))}
+      <CardContent className="p-0">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-muted-foreground">Agrupar por:</span>
+            <ButtonGroup>
+              {(["tipo", "data"] as Agrupamento[]).map((valor) => (
+                <Button
+                  key={valor}
+                  type="button"
+                  variant="outline"
+                  size="xs"
+                  aria-pressed={agrupamento === valor}
+                  onClick={() => onAgrupamentoChange(valor)}
+                  className="capitalize"
+                >
+                  {valor}
+                </Button>
+              ))}
+            </ButtonGroup>
           </div>
+
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="gap-1.5"
+              >
+                <Users className="size-4" />
+                <ChevronDown className="size-3" />
+                {filtroEquipe.length > 0 && `(${filtroEquipe.length})`}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent align="end" className="w-72">
+              <InputGroup>
+                <InputGroupAddon align="inline-start">
+                  <Search className="size-4" />
+                </InputGroupAddon>
+                <InputGroupInput
+                  placeholder="Pesquisar"
+                  value={buscaEquipe}
+                  onChange={(event) => setBuscaEquipe(event.target.value)}
+                />
+              </InputGroup>
+
+              <ScrollArea className="mt-2 *:data-[slot=scroll-area-viewport]:max-h-40">
+                <div className="space-y-1">
+                  {equipeVisivel.map((profissional) => {
+                    const selecionado = filtroEquipe.includes(profissional.id)
+
+                    return (
+                      <Item
+                        key={profissional.id}
+                        asChild
+                        size="xs"
+                        className="flex-nowrap cursor-pointer"
+                      >
+                        <label>
+                          <Checkbox
+                            checked={selecionado}
+                            onCheckedChange={() =>
+                              onAlternarEquipe(profissional.id)
+                            }
+                          />
+                          <Avatar className="size-5 shrink-0">
+                            <AvatarFallback className="text-[9px]">
+                              {iniciais(profissional.nome)}
+                            </AvatarFallback>
+                          </Avatar>
+                          <ItemContent className="min-w-0">
+                            <ItemTitle className="w-full truncate">
+                              {profissional.nome}
+                            </ItemTitle>
+                          </ItemContent>
+                        </label>
+                      </Item>
+                    )
+                  })}
+                </div>
+              </ScrollArea>
+
+              <div className="mt-2 flex items-center justify-end gap-2">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={onLimparEquipe}
+                >
+                  Limpar
+                </Button>
+                <Button type="button" size="sm">
+                  Filtrar ({filtroEquipe.length})
+                </Button>
+              </div>
+            </PopoverContent>
+          </Popover>
         </div>
 
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button type="button" variant="outline" size="sm" className="gap-1.5">
-              <Users className="size-4" />
-              <ChevronDown className="size-3" />
-              {filtroEquipe.length > 0 && `(${filtroEquipe.length})`}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent align="end" className="w-72">
-            <InputGroup>
-              <InputGroupAddon align="inline-start">
-                <Search className="size-4" />
-              </InputGroupAddon>
-              <InputGroupInput
-                placeholder="Pesquisar"
-                value={buscaEquipe}
-                onChange={(event) => setBuscaEquipe(event.target.value)}
-              />
-            </InputGroup>
+        <ScrollArea className="mt-3 *:data-[slot=scroll-area-viewport]:max-h-64">
+          <div className="space-y-1">
+            {resumo.map((item) => {
+              const selecionado = ativo(item.chave)
 
-            <ScrollArea className="mt-2 max-h-40">
-              <div className="space-y-1">
-                {equipeVisivel.map((profissional) => {
-                  const selecionado = filtroEquipe.includes(profissional.id)
-
-                  return (
-                    <label
-                      key={profissional.id}
-                      className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm hover:bg-accent"
-                    >
-                      <Checkbox
-                        checked={selecionado}
-                        onCheckedChange={() =>
-                          onAlternarEquipe(profissional.id)
-                        }
-                      />
-                      <Avatar className="size-5">
-                        <AvatarFallback className="text-[9px]">
-                          {iniciais(profissional.nome)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <span className="truncate">{profissional.nome}</span>
-                    </label>
-                  )
-                })}
-              </div>
-            </ScrollArea>
-
-            <div className="mt-2 flex items-center justify-end gap-2">
-              <Button type="button" variant="ghost" size="sm" onClick={onLimparEquipe}>
-                Limpar
-              </Button>
-              <Button type="button" size="sm">
-                Filtrar ({filtroEquipe.length})
-              </Button>
-            </div>
-          </PopoverContent>
-        </Popover>
-      </div>
-
-      <ScrollArea className="mt-3 max-h-64">
-        <ul className="divide-y">
-          {resumo.map((item) => (
-            <li key={item.chave}>
-              <button
-                type="button"
-                onClick={() => onFiltrarResumo(item.chave)}
-                className={cn(
-                  "flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm transition-colors hover:bg-accent",
-                  ativo(item.chave) && "bg-accent"
-                )}
-              >
-                {agrupamento === "tipo" ? (
-                  <RegistroIcone
-                    tipo={item.chave as TipoRegistro}
-                    className="size-4"
-                  />
-                ) : (
-                  <span className="w-4" />
-                )}
-                <span className="flex-1 truncate">
-                  {item.rotulo} ({item.quantidade})
-                </span>
-                {ativo(item.chave) && <Check className="size-4 text-primary" />}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </ScrollArea>
-    </div>
+              return (
+                <Item
+                  key={item.chave}
+                  asChild
+                  size="sm"
+                  className={cn(
+                    "flex-nowrap cursor-pointer",
+                    selecionado && "bg-accent"
+                  )}
+                >
+                  <button
+                    type="button"
+                    onClick={() => onFiltrarResumo(item.chave)}
+                  >
+                    <ItemMedia variant="icon">
+                      {agrupamento === "tipo" ? (
+                        <RegistroIcone tipo={item.chave as TipoRegistro} />
+                      ) : (
+                        <span className="size-4" />
+                      )}
+                    </ItemMedia>
+                    <ItemContent className="min-w-0">
+                      <ItemTitle className="w-full truncate">
+                        {item.rotulo} ({item.quantidade})
+                      </ItemTitle>
+                    </ItemContent>
+                    {selecionado && (
+                      <ItemActions>
+                        <Check className="size-4 shrink-0 text-primary" />
+                      </ItemActions>
+                    )}
+                  </button>
+                </Item>
+              )
+            })}
+          </div>
+        </ScrollArea>
+      </CardContent>
+    </Card>
   )
 }

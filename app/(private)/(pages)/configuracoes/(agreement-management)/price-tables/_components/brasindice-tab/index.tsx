@@ -107,7 +107,7 @@ export function BrasindiceTab() {
                     <Button
                       type="button"
                       variant="ghost"
-                      size="icon"
+                      size="icon-sm"
                       className="size-8 text-destructive hover:text-destructive"
                       onClick={() => remover(tabela.id)}
                     >

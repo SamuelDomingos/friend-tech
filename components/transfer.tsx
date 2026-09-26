@@ -128,7 +128,7 @@ export function Transfer({
         <Button
           type="button"
           variant="outline"
-          size="icon"
+          size="icon-sm"
           onClick={moveRight}
           aria-label="Incluir selecionados"
         >
@@ -138,7 +138,7 @@ export function Transfer({
         <Button
           type="button"
           variant="outline"
-          size="icon"
+          size="icon-sm"
           onClick={moveLeft}
           aria-label="Remover selecionados"
         >

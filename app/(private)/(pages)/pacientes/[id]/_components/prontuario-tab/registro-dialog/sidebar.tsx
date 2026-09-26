@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-import type { Etiqueta, PacienteDetalhe, Registro } from "../dados-mock"
-import { rotuloRegistro } from "../dados-mock"
-import { RegistroIcone } from "./registro-icones"
-import { EtiquetasPanel } from "./etiquetas-panel"
+import type { Etiqueta, PacienteDetalhe, Registro } from "../../dados-mock"
+import { rotuloRegistro } from "../../dados-mock"
+import { RegistroIcone } from "../registro-timeline/icones"
+import { EtiquetasPanel } from "../etiquetas-panel"
 
 interface RegistroSidebarProps {
   paciente: PacienteDetalhe
@@ -39,7 +39,7 @@ export function RegistroSidebar({
 
   return (
     <div className="flex h-full flex-col border-l bg-card">
-      <ScrollArea className="flex-1 p-4">
+      <ScrollArea className="min-h-0 flex-1 p-4">
         <EtiquetasPanel
           paciente={paciente}
           etiquetas={etiquetas}

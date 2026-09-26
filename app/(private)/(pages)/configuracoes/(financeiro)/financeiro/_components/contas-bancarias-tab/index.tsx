@@ -19,7 +19,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { cn } from "@/lib/utils"
 
 import { contasBancariasMock, type ContaBancaria } from "../dados-mock"
 import { ContaBancariaDialog } from "./conta-bancaria-dialog"
@@ -62,9 +61,7 @@ export function ContasBancariasTab() {
               type="button"
               variant="ghost"
               size="sm"
-              className={cn(
-                filtro === opcao && "bg-accent text-accent-foreground"
-              )}
+              aria-pressed={filtro === opcao}
               onClick={() => setFiltro(opcao)}
             >
               {opcao === "ativas" ? "Contas ativas" : "Contas inativas"}
@@ -128,7 +125,7 @@ export function ContasBancariasTab() {
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="outline"
-                          size="icon"
+                          size="icon-sm"
                           aria-label="Ações"
                         >
                           <MoreHorizontal className="size-4" />

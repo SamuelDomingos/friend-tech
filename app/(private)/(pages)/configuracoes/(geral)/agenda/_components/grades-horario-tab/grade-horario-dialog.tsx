@@ -140,7 +140,7 @@ export function GradeHorarioDialog({
                       <InputGroupAddon align="inline-start">
                         <InputGroupButton
                           variant="ghost"
-                          size="icon-xs"
+                          size="icon-sm"
                           onClick={() =>
                             field.onChange(Math.max(0, field.value - 1))
                           }
@@ -163,7 +163,7 @@ export function GradeHorarioDialog({
                       <InputGroupAddon align="inline-end">
                         <InputGroupButton
                           variant="ghost"
-                          size="icon-xs"
+                          size="icon-sm"
                           onClick={() => field.onChange(field.value + 1)}
                           aria-label="Aumentar quantidade de encaixes"
                         >

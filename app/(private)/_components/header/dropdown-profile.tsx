@@ -31,7 +31,7 @@ export function ProfileDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="icon-sm">
           <Avatar className="rounded-sm after:rounded-[inherit]">
             <AvatarFallback className="rounded-sm after:rounded-[inherit]">
               {initials}

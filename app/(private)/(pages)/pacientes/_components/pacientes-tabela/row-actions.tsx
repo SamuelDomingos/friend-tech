@@ -26,7 +26,7 @@ export function PacienteRowActions({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon" aria-label="Ações">
+        <Button variant="outline" size="icon-sm" aria-label="Ações">
           <MoreHorizontal className="size-4" />
         </Button>
       </DropdownMenuTrigger>

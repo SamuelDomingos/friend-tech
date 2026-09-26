@@ -7,8 +7,6 @@ import { AppSidebar } from "./_components/sidebar"
 import { Header } from "./_components/header"
 import { Card, CardContent } from "@/components/ui/card"
 
-// Páginas privadas dependem de auth — não pré-renderizar em build time
-// (evita criar o client Supabase com env vazio em CI/Docker).
 export const dynamic = "force-dynamic"
 
 export default async function PrivateLayout({

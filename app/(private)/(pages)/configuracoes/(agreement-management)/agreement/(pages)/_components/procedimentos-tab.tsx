@@ -176,7 +176,7 @@ export function ProcedimentosTab() {
                     <Button
                       type="button"
                       variant="destructive"
-                      size="icon"
+                      size="icon-sm"
                       onClick={() => remover(proc.id)}
                     >
                       <Trash2 className="size-4" />

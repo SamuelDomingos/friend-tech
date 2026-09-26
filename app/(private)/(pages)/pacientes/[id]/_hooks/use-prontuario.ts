@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react"
 
 import type {
+  Arquivo,
   BarraGrupo,
   Etiqueta,
   ProntuarioDados,
@@ -282,13 +283,18 @@ export function useProntuario(dados: ProntuarioDados) {
     setEtiquetas((atual) => atual.filter((e) => e.id !== id))
   }
 
-  function adicionarRegistro(tipo: TipoRegistro, texto: string) {
+  function adicionarRegistro(
+    tipo: TipoRegistro,
+    texto: string,
+    arquivos?: Arquivo[]
+  ) {
     const novoRegistro: Registro = {
       id: `r-${Date.now()}`,
       tipo,
       autorNome: "Você",
       criadoEm: new Date().toISOString(),
       texto: texto || undefined,
+      arquivos: arquivos && arquivos.length > 0 ? arquivos : undefined,
       fixado: false,
       comentarios: [],
     }

@@ -100,7 +100,7 @@ export function EnderecosAlternativos({ form }: EnderecosAlternativosProps) {
                         <Button
                           type="button"
                           variant="ghost"
-                          size="icon"
+                          size="icon-sm"
                           onClick={() => removerEndereco(endereco.id)}
                           aria-label="Remover endereço alternativo"
                         >

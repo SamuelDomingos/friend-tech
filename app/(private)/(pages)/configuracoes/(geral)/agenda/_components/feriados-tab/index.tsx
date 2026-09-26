@@ -125,7 +125,7 @@ export function FeriadosTab() {
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="outline"
-                          size="icon"
+                          size="icon-sm"
                           aria-label="Ações"
                           disabled={feriado.obrigatorio}
                         >

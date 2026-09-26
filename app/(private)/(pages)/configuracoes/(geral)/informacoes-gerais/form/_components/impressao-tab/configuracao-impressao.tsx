@@ -153,7 +153,7 @@ export function ConfiguracaoImpressao({ form }: ConfiguracaoImpressaoProps) {
               <Button
                 type="button"
                 variant="ghost"
-                size="icon"
+                size="icon-sm"
                 onClick={removerLogo}
                 aria-label="Remover logo"
               >

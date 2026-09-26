@@ -25,7 +25,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { cn } from "@/lib/utils"
 
 import { GRUPOS_PLANO } from "../../_schemas/categoria.schema"
 import {
@@ -59,9 +58,7 @@ export function PlanoContasTab() {
             type="button"
             variant="ghost"
             size="sm"
-            className={cn(
-              tipo === "entrada" && "bg-accent text-accent-foreground"
-            )}
+            aria-pressed={tipo === "entrada"}
             onClick={() => setTipo("entrada")}
           >
             <ArrowDown className="size-4 text-emerald-600" />
@@ -72,9 +69,7 @@ export function PlanoContasTab() {
             type="button"
             variant="ghost"
             size="sm"
-            className={cn(
-              tipo === "saida" && "bg-accent text-accent-foreground"
-            )}
+            aria-pressed={tipo === "saida"}
             onClick={() => setTipo("saida")}
           >
             <ArrowUp className="size-4 text-destructive" />
@@ -192,7 +187,7 @@ export function PlanoContasTab() {
                                     <DropdownMenuTrigger asChild>
                                       <Button
                                         variant="ghost"
-                                        size="icon-xs"
+                                        size="icon-sm"
                                         aria-label="Ações da conta"
                                       >
                                         <MoreHorizontal className="size-4" />

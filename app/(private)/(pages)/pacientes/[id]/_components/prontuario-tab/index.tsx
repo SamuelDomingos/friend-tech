@@ -5,6 +5,7 @@ import { Clipboard, Printer } from "lucide-react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 import { useProntuario } from "../../_hooks/use-prontuario"
@@ -13,7 +14,7 @@ import { EtiquetasPanel } from "./etiquetas-panel"
 import { EvolucoesPanel } from "./evolucoes-panel"
 import { RegistroCard } from "./registro-card"
 import { RegistroDialog } from "./registro-dialog"
-import { RegistroMenuBar } from "./registro-menu-bar"
+import { RegistroMenuBar } from "./menu-bar"
 import { RegistroTimeline } from "./registro-timeline"
 
 interface ProntuarioTabProps {
@@ -73,26 +74,28 @@ export function ProntuarioTab({ paciente, dados }: ProntuarioTabProps) {
       <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
         <div className="space-y-3">
           {prontuario.registrosVisiveis.length === 0 ? (
-            <div className="flex min-h-48 flex-col items-center justify-center gap-3 rounded-lg border bg-card p-6 text-center">
-              <span className="flex size-11 items-center justify-center rounded-full bg-muted">
-                <Clipboard className="size-5 text-muted-foreground" />
-              </span>
-              <p className="text-sm text-muted-foreground">
-                {prontuario.temFiltro
-                  ? "Nenhum registro encontrado para os filtros aplicados."
-                  : "Não há registros no prontuário"}
-              </p>
-              {prontuario.temFiltro && (
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={prontuario.limparFiltros}
-                >
-                  Limpar filtros
-                </Button>
-              )}
-            </div>
+            <Card className="min-h-48 gap-0 py-0">
+              <CardContent className="flex flex-1 flex-col items-center justify-center gap-3 px-6 py-6 text-center">
+                <span className="flex size-11 items-center justify-center rounded-full bg-muted">
+                  <Clipboard className="size-5 text-muted-foreground" />
+                </span>
+                <p className="text-sm text-muted-foreground">
+                  {prontuario.temFiltro
+                    ? "Nenhum registro encontrado para os filtros aplicados."
+                    : "Não há registros no prontuário"}
+                </p>
+                {prontuario.temFiltro && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={prontuario.limparFiltros}
+                  >
+                    Limpar filtros
+                  </Button>
+                )}
+              </CardContent>
+            </Card>
           ) : (
             prontuario.registrosVisiveis.map((registro) => (
               <RegistroCard
@@ -139,8 +142,8 @@ export function ProntuarioTab({ paciente, dados }: ProntuarioTabProps) {
         etiquetas={prontuario.etiquetas}
         onAdicionarEtiqueta={prontuario.adicionarEtiqueta}
         onRemoverEtiqueta={prontuario.removerEtiqueta}
-        onSalvar={(tipo, texto) => {
-          prontuario.adicionarRegistro(tipo, texto)
+        onSalvar={(tipo, texto, arquivos) => {
+          prontuario.adicionarRegistro(tipo, texto, arquivos)
           toast("Registro adicionado ao prontuário.")
         }}
       />

@@ -210,7 +210,7 @@ export function TotemConfig({ form }: TotemConfigProps) {
                               <Button
                                 type="button"
                                 variant="ghost"
-                                size="icon"
+                                size="icon-sm"
                                 onClick={() => removerTipoSenha(item.id)}
                                 aria-label="Remover tipo de senha"
                               >

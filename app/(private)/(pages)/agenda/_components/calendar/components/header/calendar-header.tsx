@@ -56,7 +56,7 @@ export function CalendarHeader({ view, events }: IProps) {
               <TooltipTrigger asChild>
                 <Button
                   aria-label={btn.label}
-                  size="icon"
+                  size="icon-sm"
                   variant={view === btn.view ? "default" : "outline"}
                   className={`[&_svg]:size-5 ${isFirst ? "rounded-r-none" : isLast ? "-ml-px rounded-l-none" : "-ml-px rounded-none"}`}
                   onClick={() => setView(btn.view)}
