@@ -2,9 +2,8 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 
 import { cn } from "@/lib/utils"
 
@@ -18,6 +17,7 @@ import {
   Settings,
   Users,
   Wallet,
+  type LucideIcon,
 } from "lucide-react"
 
 import {
@@ -31,19 +31,48 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 
-const navigation = [
+import { NavFlyout, type FlyoutGroup } from "./nav-flyout"
+
+interface NavItem {
+  title: string
+  url: string
+  icon: LucideIcon
+  groups?: FlyoutGroup[]
+}
+
+const navigation: NavItem[] = [
   { title: "Agenda", url: "/agenda", icon: CalendarDays },
   { title: "Pacientes", url: "/pacientes", icon: Users },
   { title: "Laudo", url: "/laudo", icon: ClipboardList },
   { title: "Convênio", url: "/convenio", icon: Handshake },
-  { title: "Financeiro", url: "/financeiro", icon: Wallet },
+  {
+    title: "Financeiro",
+    url: "/financeiro",
+    icon: Wallet,
+    groups: [
+      {
+        title: "Visão",
+        items: [
+          { title: "Dashboard", url: "/financeiro" },
+          { title: "Caixa / Banco", url: "/financeiro/caixa-banco" },
+          { title: "Fluxo de caixa", url: "/financeiro/fluxo-de-caixa" },
+        ],
+      },
+      {
+        title: "Contas",
+        items: [
+          { title: "Contas a pagar", url: "/financeiro/contas-a-pagar" },
+          { title: "Contas a receber", url: "/financeiro/contas-a-receber" },
+        ],
+      },
+    ],
+  },
   { title: "Relatórios", url: "/relatorios", icon: BarChart3 },
   { title: "Contabilidade", url: "/contabilidade", icon: Calculator },
   { title: "Estoque", url: "/estoque", icon: Package },
@@ -53,7 +82,6 @@ const navigation = [
 export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
   const { state } = useSidebar()
-
   const collapsed = state === "collapsed"
 
   return (
@@ -69,7 +97,7 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
                 height={collapsed ? 40 : 96}
                 className={cn(
                   "rounded-lg transition-all duration-200",
-                  collapsed ? "size-10" : "mx-auto size-10",
+                  collapsed ? "size-10" : "mx-auto size-10"
                 )}
               />
             </SidebarMenuButton>
@@ -82,32 +110,37 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroupContent>
             <SidebarMenu className="space-y-2">
               {navigation.map((item) => {
-                const isActive =
-                  item.url === "/"
-                    ? pathname === "/"
-                    : pathname.startsWith(item.url)
+                const isActive = pathname.startsWith(item.url)
+
+                const trigger = (
+                  <SidebarMenuButton asChild isActive={isActive}>
+                    <Link href={item.url}>
+                      <item.icon className="size-4" />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                )
 
                 return (
                   <SidebarMenuItem key={item.title}>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <SidebarMenuButton asChild isActive={isActive}>
-                          <Link href={item.url}>
-                            <item.icon className="size-4" />
-                            <span>{item.title}</span>
-                          </Link>
-                        </SidebarMenuButton>
-                      </TooltipTrigger>
+                    {item.groups ? (
+                      <NavFlyout groups={item.groups} activeUrl={pathname}>
+                        {trigger}
+                      </NavFlyout>
+                    ) : (
+                      <Tooltip>
+                        <TooltipTrigger asChild>{trigger}</TooltipTrigger>
 
-                      {collapsed && (
-                        <TooltipContent
-                          className="[&_svg]:invisible"
-                          side="right"
-                        >
-                          {item.title}
-                        </TooltipContent>
-                      )}
-                    </Tooltip>
+                        {collapsed && (
+                          <TooltipContent
+                            className="[&_svg]:invisible"
+                            side="right"
+                          >
+                            {item.title}
+                          </TooltipContent>
+                        )}
+                      </Tooltip>
+                    )}
                   </SidebarMenuItem>
                 )
               })}

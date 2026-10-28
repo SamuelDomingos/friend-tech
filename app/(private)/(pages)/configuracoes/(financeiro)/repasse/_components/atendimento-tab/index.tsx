@@ -169,7 +169,9 @@ export function AtendimentoTab() {
           <DropdownMenuContent align="end">
             <DropdownMenuItem
               onClick={() =>
-                router.push("/configuracoes/repasse/form?tipo=procedimento")
+                router.push(
+                  "/configuracoes/repasse/form?tipo=procedimento" as never
+                )
               }
             >
               <SlidersHorizontal className="size-4" />
@@ -178,7 +180,9 @@ export function AtendimentoTab() {
 
             <DropdownMenuItem
               onClick={() =>
-                router.push("/configuracoes/repasse/form?tipo=matmed")
+                router.push(
+                  "/configuracoes/repasse/form?tipo=matmed" as never
+                )
               }
             >
               <SlidersHorizontal className="size-4" />
@@ -256,10 +260,11 @@ export function AtendimentoTab() {
                         <DropdownMenuItem
                           onClick={() =>
                             router.push(
-                              "/configuracoes/repasse/form?tipo=" +
-                                (regra.tipoRepasse === "Procedimento"
+                              (`/configuracoes/repasse/form?tipo=${
+                                regra.tipoRepasse === "Procedimento"
                                   ? "procedimento"
-                                  : "matmed")
+                                  : "matmed"
+                              }`) as never
                             )
                           }
                         >

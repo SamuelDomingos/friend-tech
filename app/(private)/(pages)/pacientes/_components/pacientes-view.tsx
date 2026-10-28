@@ -1,47 +1,47 @@
-"use client"
+﻿"use client"
 
-import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { Download, SearchIcon, SlidersHorizontal } from "lucide-react"
-import { toast } from "sonner"
+import {
+  Download,
+  FileSpreadsheet,
+  FileText,
+  SearchIcon,
+  SlidersHorizontal,
+  Users,
+} from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group"
 
-import { usePacientes } from "../_hooks/use-pacientes"
+import { POR_PAGINA, usePacientes } from "../_hooks/use-pacientes"
 import type { Paciente } from "./dados-mock"
+import { ChipsFiltros } from "./pacientes-filtros/chips-filtros"
+import { PacientesFiltros } from "./pacientes-filtros"
 import { PacientesTabela } from "./pacientes-tabela"
 import { DeletePacienteDialog } from "./pacientes-tabela/delete-paciente-dialog"
-import { PacientesFiltros } from "./pacientes-filtros"
+import { Paginacao } from "./pacientes-tabela/paginacao"
 
 export function PacientesView() {
   const router = useRouter()
-  const [filtrosOpen, setFiltrosOpen] = useState(false)
-
-  const {
-    pacientes,
-    busca,
-    setBusca,
-    filtros,
-    setFiltros,
-    limparFiltros,
-    filtrados,
-    temFiltros,
-    deletando,
-    setDeletando,
-    confirmarExclusao,
-  } = usePacientes()
+  const pacientes = usePacientes()
 
   function abrirPaciente(paciente: Paciente) {
     router.push(`/pacientes/${paciente.id}`)
@@ -56,27 +56,22 @@ export function PacientesView() {
               <SearchIcon className="size-4" />
             </InputGroupAddon>
             <InputGroupInput
-              placeholder="Buscar"
-              value={busca}
-              onChange={(event) => setBusca(event.target.value)}
+              placeholder="Buscar por nome, cidade ou telefone"
+              value={pacientes.busca}
+              onChange={(event) => pacientes.setBusca(event.target.value)}
             />
           </InputGroup>
 
           <Button
             variant="outline"
-            onClick={() => setFiltrosOpen(true)}
-            disabled={pacientes.length === 0}
+            onClick={() => pacientes.setFiltrosAberto(true)}
+            disabled={pacientes.pacientes.length === 0}
           >
             <SlidersHorizontal className="size-4" />
             Filtros
-            {temFiltros && (
+            {pacientes.temFiltros && (
               <span className="flex size-5 items-center justify-center rounded-full bg-primary text-[11px] font-medium text-primary-foreground">
-                {filtros.convenios.length +
-                  Number(Boolean(filtros.cidadeEstado)) +
-                  Number(filtros.vip !== "") +
-                  Number(filtros.aniversariante !== "") +
-                  Number(Boolean(filtros.criadoInicio || filtros.criadoFim)) +
-                  Number(filtros.atendimentoTipo !== "")}
+                {pacientes.filtrosAtivos.length}
               </span>
             )}
           </Button>
@@ -84,45 +79,93 @@ export function PacientesView() {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" disabled={filtrados.length === 0}>
+            <Button
+              variant="secondary"
+              disabled={pacientes.totalFiltrados === 0}
+            >
               <Download className="size-4" />
               Exportar
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => toast("Exportação em PDF em breve.")}>
+            <DropdownMenuItem onClick={pacientes.exportarPdf}>
+              <FileText className="size-4" />
               PDF
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => toast("Exportação em Excel em breve.")}>
-              EXCEL
+            <DropdownMenuItem onClick={pacientes.exportarCsv}>
+              <FileSpreadsheet className="size-4" />
+              Excel (CSV)
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
 
-      <PacientesTabela
-        pacientes={filtrados}
-        onAbrir={abrirPaciente}
-        onDeletar={setDeletando}
+      <ChipsFiltros
+        filtros={pacientes.filtrosAtivos}
+        onRemover={pacientes.removerFiltro}
+        onLimpar={pacientes.limparFiltros}
       />
 
+      {pacientes.totalFiltrados === 0 ? (
+        <Empty className="border">
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <Users />
+            </EmptyMedia>
+            <EmptyTitle>Nenhum paciente encontrado</EmptyTitle>
+            <EmptyDescription>
+              {pacientes.temFiltros || pacientes.busca
+                ? "Ajuste a busca ou remova os filtros aplicados."
+                : "Cadastre o primeiro paciente para começar."}
+            </EmptyDescription>
+          </EmptyHeader>
+
+          {(pacientes.temFiltros || pacientes.busca) && (
+            <EmptyContent>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={pacientes.limparFiltros}
+              >
+                Limpar filtros
+              </Button>
+            </EmptyContent>
+          )}
+        </Empty>
+      ) : (
+        <>
+          <PacientesTabela
+            pacientes={pacientes.paginados}
+            onAbrir={abrirPaciente}
+            onDeletar={pacientes.setDeletando}
+          />
+
+          <Paginacao
+            paginaAtual={pacientes.paginaAtual}
+            totalPaginas={pacientes.totalPaginas}
+            totalItens={pacientes.totalFiltrados}
+            porPagina={POR_PAGINA}
+            onMudarPagina={pacientes.setPagina}
+          />
+        </>
+      )}
+
       <PacientesFiltros
-        open={filtrosOpen}
-        onOpenChange={setFiltrosOpen}
-        filtros={filtros}
-        onAplicar={setFiltros}
-        onLimpar={limparFiltros}
+        open={pacientes.filtrosAberto}
+        onOpenChange={pacientes.setFiltrosAberto}
+        filtros={pacientes.filtros}
+        onAplicar={pacientes.setFiltros}
+        onLimpar={pacientes.limparFiltros}
       />
 
       <DeletePacienteDialog
-        paciente={deletando}
+        paciente={pacientes.deletando}
         onOpenChange={(open) => {
           if (!open) {
-            setDeletando(null)
+            pacientes.setDeletando(null)
           }
         }}
-        onConfirmar={confirmarExclusao}
+        onConfirmar={pacientes.confirmarExclusao}
       />
     </div>
   )

@@ -27,7 +27,7 @@ export default async function PrivateLayout({
             <Header />
 
             <Card className="flex flex-1 flex-col mb-2">
-              <CardContent className="overflow-auto">
+              <CardContent className="overflow-auto pb-8">
                 {children}
               </CardContent>
             </Card>

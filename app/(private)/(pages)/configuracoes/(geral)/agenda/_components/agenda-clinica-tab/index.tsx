@@ -20,6 +20,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 
 import { useAgendaClinicaForm } from "../../_hooks/use-agenda-clinica-form"
+import { OutrasInformacoes } from "./outras-informacoes"
 
 const diasSemana = [
   "Segunda-Feira",
@@ -240,7 +241,7 @@ export function AgendaClinicaTab() {
       <section className="space-y-4">
         <h2 className="text-lg font-semibold">Outras informações</h2>
 
-        <p className="text-sm text-muted-foreground">Em breve.</p>
+        <OutrasInformacoes />
       </section>
     </div>
   )

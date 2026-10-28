@@ -1,8 +1,6 @@
 "use client"
 
-import { useState } from "react"
 import {
-  CalendarDays,
   ChevronDown,
   Mail,
   MessageCircle,
@@ -15,7 +13,6 @@ import {
   Video,
   Camera,
 } from "lucide-react"
-import { toast } from "sonner"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -26,22 +23,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { iniciais } from "@/lib/avatar-utils"
-import { calcularIdade } from "@/lib/utils"
 
+import { usePacienteHeader } from "../_hooks/use-paciente-header"
 import type { PacienteDetalhe } from "./dados-mock"
+import { EnviarImpressoDialog } from "./enviar-impresso-dialog"
+import { TeleconsultaDialog } from "./teleconsulta-dialog"
 
 interface PacienteHeaderProps {
   paciente: PacienteDetalhe
 }
 
 export function PacienteHeader({ paciente }: PacienteHeaderProps) {
-  const [vip, setVip] = useState(paciente.vip)
-  const [nascimento, setNascimento] = useState(() => {
-    const [ano, mes, dia] = paciente.dataNascimento.split("-").map(Number)
-    return new Date(ano, mes - 1, dia)
-  })
+  const header = usePacienteHeader(paciente)
 
   return (
     <div className="rounded-lg border bg-card">
@@ -49,8 +43,8 @@ export function PacienteHeader({ paciente }: PacienteHeaderProps) {
         <div className="flex items-start gap-4">
           <div className="relative shrink-0">
             <Avatar size="lg" className="size-14!">
-              {paciente.avatar ? (
-                <AvatarImage src={paciente.avatar} alt={paciente.nome} />
+              {header.avatarUrl ? (
+                <AvatarImage src={header.avatarUrl} alt={paciente.nome} />
               ) : (
                 <AvatarFallback className="text-lg">
                   {iniciais(paciente.nome)}
@@ -70,13 +64,17 @@ export function PacienteHeader({ paciente }: PacienteHeaderProps) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-44">
-                <DropdownMenuItem onClick={() => toast("Captura de foto em breve.")}>
-                  <Camera className="size-4" />
-                  Tirar foto
+                <DropdownMenuItem asChild>
+                  <label htmlFor="paciente-foto-camera">
+                    <Camera className="size-4" />
+                    Tirar foto
+                  </label>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => toast("Anexar foto em breve.")}>
-                  <Upload className="size-4" />
-                  Anexar foto
+                <DropdownMenuItem asChild>
+                  <label htmlFor="paciente-foto-arquivo">
+                    <Upload className="size-4" />
+                    Anexar foto
+                  </label>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -92,19 +90,14 @@ export function PacienteHeader({ paciente }: PacienteHeaderProps) {
                 size="icon-sm"
                 className="text-amber-500 hover:text-amber-500"
                 aria-label="Alternar VIP"
-                onClick={() => {
-                  setVip((atual) => !atual)
-                  toast(vip ? "Removido de VIP." : "Marcado como VIP.")
-                }}
+                aria-pressed={header.vip}
+                onClick={header.alternarVip}
               >
-                <Star className={vip ? "fill-current" : ""} />
+                <Star className={header.vip ? "fill-current" : ""} />
               </Button>
 
               {paciente.notaHeader && (
-                <Button
-                  size="icon-sm"
-                  aria-label="Nota do paciente"
-                >
+                <Button size="icon-sm" aria-label="Nota do paciente">
                   <StickyNote className="size-4" />
                 </Button>
               )}
@@ -116,7 +109,7 @@ export function PacienteHeader({ paciente }: PacienteHeaderProps) {
                   Idade
                 </span>
                 <span className="block max-w-32 truncate text-sm">
-                  {calcularIdade(nascimento)} anos
+                  {header.idade} anos
                 </span>
               </li>
               <li>
@@ -141,18 +134,18 @@ export function PacienteHeader({ paciente }: PacienteHeaderProps) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-52">
-                <DropdownMenuItem onClick={() => toast("Teleconsulta em breve.")}>
+                <DropdownMenuItem
+                  onClick={() => header.setTeleconsultaAberto(true)}
+                >
                   <Video className="size-4" />
                   Teleconsulta
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onClick={() => toast("Abrindo WhatsApp do paciente.")}
-                >
+                <DropdownMenuItem onClick={header.abrirWhatsapp}>
                   <MessageCircle className="size-4" />
                   WhatsApp
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => toast("Envio de impresso em breve.")}>
+                <DropdownMenuItem onClick={() => header.setImpressoAberto(true)}>
                   <Mail className="size-4" />
                   Enviar impresso
                 </DropdownMenuItem>
@@ -179,6 +172,35 @@ export function PacienteHeader({ paciente }: PacienteHeaderProps) {
           </div>
         </div>
       </div>
+
+      <input
+        id="paciente-foto-camera"
+        type="file"
+        accept="image/*"
+        capture="user"
+        className="hidden"
+        onChange={header.aoSelecionarFoto}
+      />
+
+      <input
+        id="paciente-foto-arquivo"
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={header.aoSelecionarFoto}
+      />
+
+      <TeleconsultaDialog
+        open={header.teleconsultaAberto}
+        onOpenChange={header.setTeleconsultaAberto}
+        paciente={paciente}
+      />
+
+      <EnviarImpressoDialog
+        open={header.impressoAberto}
+        onOpenChange={header.setImpressoAberto}
+        paciente={paciente}
+      />
     </div>
   )
 }

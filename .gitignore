@@ -18,6 +18,8 @@
 # production
 /build
 
+/re-amigo
+
 # misc
 .DS_Store
 *.pem

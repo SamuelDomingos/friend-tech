@@ -3,10 +3,13 @@ import { notFound } from "next/navigation"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 import { PacienteHeader } from "./_components/paciente-header"
-import { AbaPlaceholder } from "./_components/aba-placeholder"
+import { AtualizacoesTab } from "./_components/atualizacoes-tab"
+import { CadastroTab } from "./_components/cadastro-tab"
+import { ConsumoTab } from "./_components/consumo-tab"
 import { ContasTab } from "./_components/contas-tab"
 import { OrcamentosTab } from "./_components/orcamentos-tab"
 import { ProntuarioTab } from "./_components/prontuario-tab"
+import { SessoesTab } from "./_components/sessoes-tab"
 import { getProntuarioPorPaciente } from "./_components/dados-mock"
 
 export default async function PacienteDetailPage({
@@ -49,31 +52,19 @@ export default async function PacienteDetailPage({
         </TabsContent>
 
         <TabsContent value="sessoes" className="mt-4">
-          <AbaPlaceholder
-            titulo="Sessões"
-            descricao="Controle de sessões do paciente."
-          />
+          <SessoesTab />
         </TabsContent>
 
         <TabsContent value="consumo" className="mt-4">
-          <AbaPlaceholder
-            titulo="Consumo"
-            descricao="Consumo de materiais e medicamentos."
-          />
+          <ConsumoTab pacienteNome={paciente.nome} />
         </TabsContent>
 
         <TabsContent value="atualizacoes" className="mt-4">
-          <AbaPlaceholder
-            titulo="Atualizações"
-            descricao="Histórico de alterações do cadastro."
-          />
+          <AtualizacoesTab />
         </TabsContent>
 
         <TabsContent value="cadastro" className="mt-4">
-          <AbaPlaceholder
-            titulo="Cadastro"
-            descricao="Dados cadastrais do paciente."
-          />
+          <CadastroTab paciente={paciente} />
         </TabsContent>
       </Tabs>
     </div>

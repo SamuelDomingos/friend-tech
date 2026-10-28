@@ -1,6 +1,6 @@
-"use client"
+﻿"use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import { toast } from "sonner"
 
 import { pacientesMock, type Paciente } from "../_components/dados-mock"
@@ -17,6 +17,11 @@ export interface PacienteFiltros {
   atendimentoFim: string
 }
 
+export interface FiltroAtivo {
+  chave: string
+  rotulo: string
+}
+
 export const FILTROS_INICIAIS: PacienteFiltros = {
   convenios: [],
   cidadeEstado: "",
@@ -28,6 +33,8 @@ export const FILTROS_INICIAIS: PacienteFiltros = {
   atendimentoInicio: "",
   atendimentoFim: "",
 }
+
+export const POR_PAGINA = 10
 
 const entreDatas = (iso: string, inicio: string, fim: string) => {
   if (!iso) {
@@ -42,18 +49,24 @@ const entreDatas = (iso: string, inicio: string, fim: string) => {
   return true
 }
 
+const formatarData = (iso: string) => {
+  if (!iso) {
+    return ""
+  }
+  const [ano, mes, dia] = iso.split("-")
+  return `${dia}/${mes}/${ano}`
+}
+
 export function usePacientes() {
   const [pacientes, setPacientes] = useState<Paciente[]>(pacientesMock)
   const [deletando, setDeletando] = useState<Paciente | null>(null)
-  const [busca, setBusca] = useState("")
+  const [busca, setBuscaInterna] = useState("")
   const [buscaDebounced, setBuscaDebounced] = useState("")
-  const [filtros, setFiltros] = useState<PacienteFiltros>(FILTROS_INICIAIS)
+  const [filtros, setFiltrosInterno] = useState<PacienteFiltros>(FILTROS_INICIAIS)
+  const [pagina, setPagina] = useState(1)
+  const [filtrosAberto, setFiltrosAberto] = useState(false)
 
-  useEffect(() => {
-    const timer = setTimeout(() => setBuscaDebounced(busca), 1000)
-    return () => clearTimeout(timer)
-  }, [busca])
-
+  // Termo de busca aplicado imediatamente ao filtro e à primeira página.
   const filtrados = useMemo(() => {
     const termo = buscaDebounced.trim().toLowerCase()
     const hoje = new Date()
@@ -148,6 +161,13 @@ export function usePacientes() {
     })
   }, [pacientes, buscaDebounced, filtros])
 
+  const totalPaginas = Math.max(1, Math.ceil(filtrados.length / POR_PAGINA))
+  const paginaAtual = Math.min(pagina, totalPaginas)
+  const paginados = filtrados.slice(
+    (paginaAtual - 1) * POR_PAGINA,
+    paginaAtual * POR_PAGINA
+  )
+
   const temFiltros =
     filtros.convenios.length > 0 ||
     Boolean(filtros.cidadeEstado) ||
@@ -157,10 +177,107 @@ export function usePacientes() {
     filtros.atendimentoTipo !== "" ||
     Boolean(filtros.atendimentoInicio || filtros.atendimentoFim)
 
+  const filtrosAtivos: FiltroAtivo[] = [
+    ...filtros.convenios.map((convenio) => ({
+      chave: `convenio:${convenio}`,
+      rotulo: `Convênio: ${convenio}`,
+    })),
+    ...(filtros.cidadeEstado
+      ? [{ chave: "cidade", rotulo: `Cidade/UF: ${filtros.cidadeEstado}` }]
+      : []),
+    ...(filtros.vip
+      ? [
+          {
+            chave: "vip",
+            rotulo: `VIP: ${filtros.vip === "sim" ? "Sim" : "Não"}`,
+          },
+        ]
+      : []),
+    ...(filtros.aniversariante
+      ? [
+          {
+            chave: "aniversariante",
+            rotulo: `Aniversariantes: ${
+              filtros.aniversariante === "hoje" ? "hoje" : "do mês"
+            }`,
+          },
+        ]
+      : []),
+    ...(filtros.criadoInicio || filtros.criadoFim
+      ? [
+          {
+            chave: "criado",
+            rotulo: `Cadastro: ${formatarData(filtros.criadoInicio) || "…"} – ${
+              formatarData(filtros.criadoFim) || "…"
+            }`,
+          },
+        ]
+      : []),
+    ...(filtros.atendimentoTipo
+      ? [
+          {
+            chave: "atendimento",
+            rotulo: `${
+              filtros.atendimentoTipo === "ultimo"
+                ? "Último atendimento"
+                : "Próximo atendimento"
+            }: ${formatarData(filtros.atendimentoInicio) || "…"} – ${
+              formatarData(filtros.atendimentoFim) || "…"
+            }`,
+          },
+        ]
+      : []),
+  ]
+
+  function setBusca(valor: string) {
+    setBuscaInterna(valor)
+    setBuscaDebounced(valor)
+    setPagina(1)
+  }
+
+  function setFiltros(valor: PacienteFiltros) {
+    setFiltrosInterno(valor)
+    setPagina(1)
+  }
+
+  function removerFiltro(chave: string) {
+    setFiltrosInterno((atual) => {
+      if (chave.startsWith("convenio:")) {
+        const convenio = chave.replace("convenio:", "")
+        return {
+          ...atual,
+          convenios: atual.convenios.filter((item) => item !== convenio),
+        }
+      }
+
+      switch (chave) {
+        case "cidade":
+          return { ...atual, cidadeEstado: "" }
+        case "vip":
+          return { ...atual, vip: "" }
+        case "aniversariante":
+          return { ...atual, aniversariante: "" }
+        case "criado":
+          return { ...atual, criadoInicio: "", criadoFim: "" }
+        case "atendimento":
+          return {
+            ...atual,
+            atendimentoTipo: "",
+            atendimentoInicio: "",
+            atendimentoFim: "",
+          }
+        default:
+          return atual
+      }
+    })
+    setPagina(1)
+  }
+
   function limparFiltros() {
-    setFiltros(FILTROS_INICIAIS)
-    setBusca("")
+    setFiltrosInterno(FILTROS_INICIAIS)
+    setBuscaInterna("")
     setBuscaDebounced("")
+    setPagina(1)
   }
 
   function confirmarExclusao() {
@@ -173,17 +290,73 @@ export function usePacientes() {
     setDeletando(null)
   }
 
+  function exportarCsv() {
+    if (filtrados.length === 0) {
+      toast("Nenhum paciente para exportar.")
+      return
+    }
+
+    const linhas = [
+      ["Nome", "Telefone", "Cidade", "UF", "Último atendimento", "Próximo atendimento", "Convênios"],
+      ...filtrados.map((paciente) => [
+        paciente.nome,
+        paciente.telefone,
+        paciente.cidade,
+        paciente.estado,
+        formatarData(paciente.ultimoAtendimento),
+        formatarData(paciente.proximoAtendimento),
+        paciente.convenios.join(" / "),
+      ]),
+    ]
+
+    const csv = linhas
+      .map((linha) => linha.map((valor) => `"${valor}"`).join(";"))
+      .join("\r\n")
+
+    const blob = new Blob([`\uFEFF${csv}`], {
+      type: "text/csv;charset=utf-8;",
+    })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement("a")
+    link.href = url
+    link.download = "pacientes.csv"
+    link.click()
+    URL.revokeObjectURL(url)
+
+    toast(`${filtrados.length} paciente(s) exportado(s).`)
+  }
+
+  function exportarPdf() {
+    if (filtrados.length === 0) {
+      toast("Nenhum paciente para exportar.")
+      return
+    }
+
+    window.print()
+  }
+
   return {
     pacientes,
     busca,
     setBusca,
     filtros,
     setFiltros,
+    filtrosAberto,
+    setFiltrosAberto,
     limparFiltros,
+    filtrosAtivos,
+    removerFiltro,
     filtrados,
+    paginados,
+    paginaAtual,
+    totalPaginas,
+    totalFiltrados: filtrados.length,
+    setPagina,
     temFiltros,
     deletando,
     setDeletando,
     confirmarExclusao,
+    exportarCsv,
+    exportarPdf,
   }
 }

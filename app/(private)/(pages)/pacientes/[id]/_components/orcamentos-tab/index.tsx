@@ -16,8 +16,10 @@ import type { PacienteDetalhe } from "../dados-mock"
 import {
   orcamentosMock,
   resumirOrcamentos,
+  type Orcamento,
   type StatusOrcamento,
 } from "./dados-mock"
+import { ExcluirOrcamentoDialog } from "./excluir-orcamento-dialog"
 import { OrcamentoDialog } from "./orcamento-dialog"
 import { ResumoStatus } from "./resumo-status"
 import { TabelaOrcamentos } from "./tabela-orcamentos"
@@ -28,14 +30,16 @@ interface OrcamentosTabProps {
 }
 
 export function OrcamentosTab({ paciente }: OrcamentosTabProps) {
+  const [lista, setLista] = useState<Orcamento[]>(orcamentosMock)
   const [inicio, setInicio] = useState<Date | undefined>()
   const [fim, setFim] = useState<Date | undefined>()
   const [busca, setBusca] = useState("")
   const [status, setStatus] = useState<StatusOrcamento | "">("")
   const [dialogAberto, setDialogAberto] = useState(false)
+  const [excluindo, setExcluindo] = useState<Orcamento | null>(null)
 
   const termo = busca.trim().toLowerCase()
-  const filtrados = orcamentosMock.filter((orcamento) => {
+  const filtrados = lista.filter((orcamento) => {
     if (status && orcamento.status !== status) {
       return false
     }
@@ -96,7 +100,7 @@ export function OrcamentosTab({ paciente }: OrcamentosTabProps) {
       </div>
 
       <ResumoStatus
-        resumo={resumirOrcamentos(orcamentosMock)}
+        resumo={resumirOrcamentos(lista)}
         selecionado={status}
         onSelecionar={setStatus}
       />
@@ -104,13 +108,29 @@ export function OrcamentosTab({ paciente }: OrcamentosTabProps) {
       <TabelaOrcamentos
         orcamentos={filtrados}
         onEditar={() => setDialogAberto(true)}
-        onExcluir={() => toast("Excluir orçamento em breve.")}
+        onExcluir={(orcamento) => setExcluindo(orcamento)}
       />
 
       <OrcamentoDialog
         open={dialogAberto}
         onOpenChange={setDialogAberto}
         paciente={paciente}
+      />
+
+      <ExcluirOrcamentoDialog
+        orcamento={excluindo}
+        onOpenChange={(open) => {
+          if (!open) setExcluindo(null)
+        }}
+        onConfirmar={() => {
+          if (excluindo) {
+            setLista((atual) =>
+              atual.filter((orcamento) => orcamento.id !== excluindo.id)
+            )
+            toast("Orçamento excluído.")
+          }
+          setExcluindo(null)
+        }}
       />
     </div>
   )
